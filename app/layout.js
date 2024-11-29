@@ -9,9 +9,10 @@ const sourceCodePro = Source_Code_Pro({
 export const metadata = {
   title: {
     template: "%s | Digital Garden",
-    default: "Welcome | Digital Garden",
+    default: "Web Development | Miriam Sparbrod",
   },
-  description: "Portfolio Web - Application Development by Miriam Sparbrod",
+  description:
+    "Portfolio Full - Stack - Web - Application Development by Miriam Sparbrod",
 };
 
 export default function RootLayout({ children }) {

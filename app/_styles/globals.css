@@ -97,6 +97,22 @@
   --rose-900: #881337;
   --rose-950: #4c0519;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+html,
+body {
+  width: 100vh;
+  height: 100vh;
+  color: #d6d3d1;
+}
+
+/* Für Chrome, Edge und Safari 
 body {
   font-family: "Inter", sans-serif;
 }
@@ -115,7 +131,7 @@ pre {
   scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
 }
 
-/* Für Chrome, Edge und Safari */
+
 .horizontal-scrollbar::-webkit-scrollbar {
   height: 4px;
 }
@@ -135,14 +151,17 @@ pre {
   background-position: center;
 }
 
-/* Scrollbar für alle Scroll-Elemente ausblenden */
+/* Scrollbar für alle Scroll-Elemente ausblenden 
 ::-webkit-scrollbar {
   display: none;
 }
 
-/* Für alle anderen Browser */
+/* Für alle anderen Browser 
 html,
 body {
-  -ms-overflow-style: none; /* IE und Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+  scroll-behavior: smooth;
 }
+
+*/

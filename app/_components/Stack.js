@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
+
 import { motion } from "framer-motion";
 import {
   AiOutlineWindows,
@@ -21,6 +21,8 @@ import {
   SiMocha,
   SiTestinglibrary,
   SiLighthouse,
+  SiOpenaigym,
+  SiOpenai,
 } from "react-icons/si";
 import { FaPhp } from "react-icons/fa6";
 import {
@@ -33,8 +35,11 @@ import {
   TbBrandVercel,
   TbBrandGithub,
   TbBrandDocker,
+  TbBrandGithubCopilot,
+  TbBrandOpenai,
 } from "react-icons/tb";
 import { GrReactjs } from "react-icons/gr";
+import { BsFiletypeJson } from "react-icons/bs";
 
 export default function Stack() {
   const [visibleStacks, setVisibleStacks] = useState([]);
@@ -314,7 +319,7 @@ export default function Stack() {
       content: (
         <div className="flex flex-col items-center space-y-4">
           <div className="flex flex-col items-center group">
-            <AiOutlineRobot />
+            <SiOpenai />
             <span className="text-xs">ChatGPT API</span>
             <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
               (Integration with OpenAI’s GPT models for conversational and NLP
@@ -322,21 +327,21 @@ export default function Stack() {
             </span>
           </div>
           <div className="flex flex-col items-center group">
-            <AiOutlineRobot />
+            <TbBrandGithubCopilot />
             <span className="text-xs">GitHub Copilot</span>
             <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
               (AI-powered code completion and suggestions using GPT-4)
             </span>
           </div>
           <div className="flex flex-col items-center group">
-            <AiOutlineRobot />
+            <TbBrandOpenai />
             <span className="text-xs">OpenAI APIs</span>
             <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
               (Utilizing AI models for automation, content generation, and more)
             </span>
           </div>
           <div className="flex flex-col items-center group">
-            <AiOutlineRobot />
+            <BsFiletypeJson />
             <span className="text-xs">JSON API Integration</span>
             <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
               (Integrating AI APIs via RESTful JSON-based APIs)
@@ -348,17 +353,7 @@ export default function Stack() {
   ];
 
   return (
-    <div className="relative hidden md:grid md:grid-cols-3 md:gap-4 p-4">
-      <Image
-        src="/img/bgstack.png"
-        alt="Background Image"
-        layout="fill"
-        objectFit="cover"
-        quality={80}
-        className="z-0 opacity-60"
-        priority
-      />
-
+    <div className="relative hidden md:grid md:grid-cols-3 md:gap-2 p-2">
       {sections.map((section, index) => (
         <motion.div
           key={index}

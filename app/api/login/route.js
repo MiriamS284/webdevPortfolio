@@ -2,6 +2,13 @@ import { NextResponse } from "next/server";
 import { SignJWT } from "jose";
 import { nanoid } from "nanoid";
 
+const users = [
+  {
+    username: "admin",
+    password: "supersecurepassword",
+  },
+];
+
 export async function POST(req) {
   const { username, password } = await req.json();
 

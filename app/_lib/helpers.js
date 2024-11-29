@@ -112,3 +112,34 @@ export async function fetchProjectById(id) {
     return null;
   }
 }
+
+export async function fetchProductionProjects(apiUrl) {
+  try {
+    const response = await fetch(apiUrl, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `Fehler beim Abrufen der Projekte: ${response.statusText}`
+      );
+    }
+
+    const projects = await response.json();
+
+    // Nur Projekte mit `environment: "Production"` zurückgeben
+    const productionProjects = projects.map((project) => ({
+      title: project.title,
+      titleImage: project.titleImage,
+      description: project.description || "Keine Beschreibung verfügbar",
+    }));
+
+    return productionProjects;
+  } catch (error) {
+    console.error("Fehler in der Helper-Funktion:", error.message);
+    return [];
+  }
+}

@@ -53,12 +53,12 @@ export default function ContactForm() {
   return (
     <div className="flex h-screen px-4">
       <div className="hidden md:flex items-start justify-end w-1/4  pr-1 pt-4">
-        <span className="text-stone-600 text-3xl mt-4 tracking-widest">
+        <span className="text-stone-200 text-3xl mt-4 tracking-widest">
           KONTAKT
         </span>
       </div>
 
-      <div className="bg-stone-100 text-stone-600 shadow-lg w-full max-w-1/3 p-8 space-y-4">
+      <div className="bg-stone-200 text-stone-600 shadow-lg w-full max-w-[700px] p-8 space-y-4">
         <h2 className="text-3xl text-left tracking-widest -ml-8">FORMULAR</h2>
         <form onSubmit={handleSubmit} className="space-y-4 p-10">
           <div className="flex space-x-4">

@@ -3,29 +3,29 @@
 import Link from "next/link";
 import dynamic from "next/dynamic";
 
-// Lazy load the login icon
 const CiLogin = dynamic(() =>
   import("react-icons/ci").then((mod) => mod.CiLogin)
 );
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
-    <footer className="bg-primary-800 text-stone-500 p-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="flex-1 text-center text-sm">
-          <div>&copy; {currentYear} All rights reserved</div>
+    <footer className="bg-primary-800 text-stone-400 p-4">
+      <div className="container mx-auto items-center">
+        <div className="flex-1 text-center text-xs md:mb-0">
+          <div>&copy; 2024 All rights reserved</div>
           <div className="flex justify-center space-x-4 mt-2">
-            <a href="/imprint" className="hover:text-stone-600 text-stone-300">
+            <Link
+              href="/imprint"
+              className="hover:text-stone-500 text-stone-300"
+            >
               Impressum
-            </a>
-            <a
+            </Link>
+            <Link
               href="/privatepolicy"
-              className="hover:text-stone-600 text-stone-300"
+              className="hover:text-stone-500 text-stone-300"
             >
               Datenschutz
-            </a>
+            </Link>
           </div>
         </div>
         <div className="flex justify-end flex-1">

@@ -8,7 +8,19 @@ export async function GET(req) {
 
     const projects = await Project.find(
       { environment: "Production" },
-      { title: 1, titleImage: 1, environment: 1 }
+      {
+        title: 1,
+        titleImage: 1,
+        description: 1,
+        layoutImages: 1,
+        category: 1,
+        techStack: 1,
+        features: 1,
+        challenges: 1,
+        learnings: 1,
+        liveLink: 1,
+        repoLink: 1,
+      }
     );
 
     console.log("Projekte erfolgreich abgerufen:", projects);
