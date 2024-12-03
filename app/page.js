@@ -12,7 +12,8 @@ import StackSection from "./_components/StackSection";
 import ResourcesSection from "./_components/ResourcesSection";
 import Navigation from "./_components/Navigation";
 import ContactForm from "./_components/ContactForm";
-import HorizontalScroll from "./_components/HorizontalScroll";
+//import HorizontalScroll from "./_components/HorizontalScroll";
+import DynamicSlider from "./_components/ProjectSlider";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,11 +29,11 @@ export default function Page() {
   const websiteContentRef = useRef(null);
 
   const introHeaders = [
-    "<span >FULL STACK</span> App Development",
-    "<span >FULL STACK</span> Frontend Development",
-    "<span >FULL STACK</span> Backend Development",
-    "<span >FULL STACK</span> Digital Garden",
-    "Localisation & Translation",
+    "<span>FULL STACK</span> Web Development",
+    "<span className='text-stone-400' >FULL STACK</span> App Development",
+    "<span className='text-stone-400' >FULL STACK</span> Front & Back Development",
+    "<span className='text-stone-400' >FULL STACK</span> Localisation & Translation",
+    "<span className='text-stone-400' >FREELANCE</span> Developer & Translator",
   ];
 
   useGSAP(
@@ -220,10 +221,17 @@ export default function Page() {
               </h1>
               <div ref={introCopyRef}>
                 <p className="text-[16px] font-medium text-justify text-[#a8a29e] leading-[130%] relative mt-[0.75em] translate-x-[20px] opacity-0">
-                  Ich bin Web Entwicklerin....
+                  Ich bin Web-Entwicklerin mit Fokus auf die Verbindung von
+                  Kreativität und Funktionalität – ich erschaffe moderne,
+                  nutzerzentrierte Weblösungen. Dabei kombiniere ich technisches
+                  Know-how mit einem tiefen Verständnis für Sprache und Design,
+                  um digitale Erlebnisse zu gestalten, die inspirieren und
+                  überzeugen.
                 </p>
                 <p className="text-[16px] font-medium text-justify text-[#a8a29e] leading-[130%] relative mt-[0.75em] translate-x-[20px] opacity-0">
-                  Ich kultiviere meine Arbeit in einem Digitalen Garten...
+                  In meinem Digitalen Garten teile ich meine Arbeit transparent,
+                  fördere den Austausch und lade dazu ein, gemeinsam an
+                  nachhaltigen Projekten zu wachsen.
                 </p>
               </div>
             </div>
@@ -286,8 +294,10 @@ export default function Page() {
             <div className="section-title fixed top-0 left-0 w-full h-[60px] flex items-center justify-center text-[#44403c] text-lg opacity-0">
               Projekte
             </div>
-            <HorizontalScroll />
+            {/* <HorizontalScroll /> */}
+            <DynamicSlider />
           </section>
+          {/*
           <section
             id="development"
             className="bg-[#44403c] w-screen h-[300vh] flex justify-center items-center relative"
@@ -297,6 +307,7 @@ export default function Page() {
             </div>
             Entwicklungsumgebung
           </section>
+          */}
           <section
             id="seed"
             className="bg-[#44403c] w-screen min-h-screen flex justify-center items-center relative"

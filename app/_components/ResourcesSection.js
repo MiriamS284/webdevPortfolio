@@ -67,6 +67,7 @@ import { CiUser } from "react-icons/ci";
 import { CgScrollV } from "react-icons/cg";
 
 import { useEffect, useRef } from "react";
+import { GiSteamLocomotive } from "react-icons/gi";
 
 export default function ResourcesSection() {
   const graphicRef = useRef(null);
@@ -126,12 +127,12 @@ export default function ResourcesSection() {
         },
         {
           name: "30 CSS Selectors by Tutplus",
-          link: "https://webdesign.tutsplus.com/articles/the-30-css-selectors-you-must-memorize--cms-24593",
+          link: "https://tutsplus.com/",
           icon: <TbBrandCss3 />,
         },
         {
           name: "CSS for People Who Hate CSS",
-          link: "https://gist.github.com/paulcpederson/23d127e0c4b5c6f2d0137f2fe16aa037",
+          link: "https://paulcpederson.com/articles/css-for-people-who-hate-css/",
           icon: <TbBrandCss3 />,
         },
         {
@@ -434,6 +435,11 @@ export default function ResourcesSection() {
           name: "Framer Motion",
           link: "https://motion.dev/",
           icon: <TbBrandFramerMotion />,
+        },
+        {
+          name: "Locomotive Scroll",
+          link: "https://locomotivemtl.github.io/locomotive-scroll/",
+          icon: <GiSteamLocomotive />,
         },
       ],
     },

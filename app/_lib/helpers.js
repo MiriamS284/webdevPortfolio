@@ -1,11 +1,9 @@
 import parse, { domToReact } from "html-react-parser";
 export const sanitizeAndParse = (content) => {
   if (typeof window === "undefined") {
-    // Wenn die Funktion serverseitig ausgeführt wird, gib den Inhalt unverändert zurück
     return content;
   }
 
-  // Importiere `DOMPurify` nur im Client
   const createDOMPurify = require("dompurify");
   const DOMPurify = createDOMPurify(window);
 
@@ -95,7 +93,7 @@ export async function fetchProjectByTitle(title) {
 export async function fetchProjectById(id) {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-    console.log(`Abrufen der Projektdaten von: ${baseUrl}/api/projects/${id}`); // Debug-Ausgabe
+    console.log(`Abrufen der Projektdaten von: ${baseUrl}/api/projects/${id}`);
 
     const response = await fetch(`${baseUrl}/api/projects/${id}`);
     if (!response.ok) {
@@ -130,7 +128,6 @@ export async function fetchProductionProjects(apiUrl) {
 
     const projects = await response.json();
 
-    // Nur Projekte mit `environment: "Production"` zurückgeben
     const productionProjects = projects.map((project) => ({
       title: project.title,
       titleImage: project.titleImage,
@@ -140,6 +137,36 @@ export async function fetchProductionProjects(apiUrl) {
     return productionProjects;
   } catch (error) {
     console.error("Fehler in der Helper-Funktion:", error.message);
+    return [];
+  }
+}
+
+export async function fetchDevelopmentProjects(apiUrl) {
+  try {
+    const response = await fetch(apiUrl, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `Fehler beim Abrufen der Entwicklungsprojekte: ${response.statusText}`
+      );
+    }
+
+    const projects = await response.json();
+
+    const developmentProjects = projects.map((project) => ({
+      title: project.title,
+      titleImage: project.titleImage,
+      description: project.description || "Keine Beschreibung verfügbar",
+    }));
+
+    return developmentProjects;
+  } catch (error) {
+    console.error("Fehler in der Development Helper-Funktion:", error.message);
     return [];
   }
 }

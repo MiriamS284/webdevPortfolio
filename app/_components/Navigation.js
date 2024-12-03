@@ -29,11 +29,7 @@ export default function Navigation() {
       label: "Projekte",
       icon: <GiButterflyFlower size={20} />,
     },
-    {
-      id: "development",
-      label: "Entwicklung",
-      icon: <LiaSeedlingSolid size={20} />,
-    },
+
     { id: "seed", label: "Gedanken", icon: <GiPlantSeed size={20} /> },
     { id: "contact", label: "Kontakt", icon: <PiMailboxLight size={20} /> },
   ];

@@ -90,9 +90,9 @@ const Card = ({ project }) => {
       {/* Text */}
       <div className="flex flex-col justify-between text-center">
         <h2 className="text-xl text-[#44403c] font-bold">{project.title}</h2>
-        <p className="text-sm text-[#44403c] mt-2 leading-relaxed">
+        <div className="text-sm text-[#44403c] mt-2 leading-relaxed">
           {sanitizeAndParse(project.description)}
-        </p>
+        </div>
       </div>
     </div>
   );

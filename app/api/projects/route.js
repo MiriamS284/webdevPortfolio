@@ -1,11 +1,25 @@
 import connectToDatabase from "../../config/database";
 import Project from "../../models/Projects";
 
-connectToDatabase();
+//connectToDatabase();
 
 export async function POST(req) {
   try {
-    // Request-Daten parsen
+    // Verbindung zur Datenbank herstellen
+    await connectToDatabase();
+
+    // Request-Daten sicher parsen
+    let body;
+    try {
+      body = await req.json();
+    } catch (error) {
+      console.error("Fehler beim Parsen der Anfrage:", error);
+      return new Response(
+        JSON.stringify({ message: "Ungültiges JSON im Request-Body" }),
+        { status: 400 }
+      );
+    }
+
     const {
       title,
       description,
@@ -20,9 +34,17 @@ export async function POST(req) {
       repoLink,
       titleImage,
       layoutImages,
-    } = await req.json();
+    } = body;
 
-    // Neues Projekt erstellen
+    // Felder validieren
+    if (!title || !description || !category) {
+      return new Response(
+        JSON.stringify({ message: "Fehlende erforderliche Felder" }),
+        { status: 400 }
+      );
+    }
+
+    // Neues Projekt erstellen und speichern
     const project = new Project({
       title,
       description,
@@ -39,12 +61,16 @@ export async function POST(req) {
       layoutImages,
     });
 
-    await project.save();
+    const savedProject = await project.save();
 
     return new Response(
-      JSON.stringify({ message: "Projekt erfolgreich erstellt", project }),
+      JSON.stringify({
+        message: "Projekt erfolgreich erstellt",
+        project: savedProject,
+      }),
       {
         status: 201,
+        headers: { "Content-Type": "application/json" },
       }
     );
   } catch (error) {
@@ -53,6 +79,7 @@ export async function POST(req) {
       JSON.stringify({ message: "Fehler beim Erstellen des Projekts" }),
       {
         status: 500,
+        headers: { "Content-Type": "application/json" },
       }
     );
   }
@@ -67,7 +94,6 @@ export async function GET(req) {
     const title = searchParams.get("title");
 
     if (title) {
-      // Einzelnes Projekt basierend auf `title` und `environment` abrufen
       const project = await Project.findOne(
         { title: decodeURIComponent(title), environment: "Production" },
         {

@@ -8,5 +8,12 @@ module.exports = {
   theme: {
     extend: {},
   },
+  variants: {
+    extend: {
+      filter: ["hover", "group-hover"],
+      grayscale: ["hover", "group-hover"],
+      opacity: ["hover", "group-hover"],
+    },
+  },
   plugins: [],
 };

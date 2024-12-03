@@ -7,7 +7,7 @@ export async function GET(req) {
     await connectToDatabase();
 
     const projects = await Project.find(
-      { environment: "Production" },
+      { environment: "Development" },
       {
         title: 1,
         titleImage: 1,
@@ -24,16 +24,16 @@ export async function GET(req) {
       }
     );
 
-    console.log("Projekte erfolgreich abgerufen:", projects);
+    console.log("Entwicklungsprojekte erfolgreich abgerufen:", projects);
     return new Response(JSON.stringify(projects), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.error("Fehler beim Abrufen der Projekte:", error);
+    console.error("Fehler beim Abrufen der Entwicklungsprojekte:", error);
     return new Response(
       JSON.stringify({
-        error: "Fehler beim Abrufen der Projekte",
+        error: "Fehler beim Abrufen der Entwicklungsprojekte",
         details: error.message,
       }),
       {

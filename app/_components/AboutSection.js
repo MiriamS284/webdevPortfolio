@@ -16,22 +16,22 @@ export default function AboutSection() {
         >
           <div className="md:w-3/5 order-2 md:order-1 text-center md:text-left">
             <p className="text-lg leading-relaxed">
-              HERZLICH WILLKOMMEN! Ich bin eine leidenschaftliche
-              Sprachübersetzerin und Full-Stack-Entwicklerin, die die digitale
-              und analoge Welt miteinander verbindet. Sprache war schon immer
-              meine erste Liebe, das Spiel mit Nuancen und Bedeutungen – eine
-              Welt, in der Worte Brücken zwischen Kulturen und Menschen bauen.
-              Doch irgendwann hat mich eine neue Dimension angezogen: die
-              Programmierung. Der kreative Prozess, Ideen in lebendige digitale
-              Anwendungen zu verwandeln, hat mich fasziniert und schließlich
-              dazu geführt, den MERN Stack (MongoDB, Express, React, Node.js) zu
-              meistern. Heute entwickle ich mit Hingabe und Präzision
-              Full-Stack-Webapplikationen, die nicht nur funktionieren, sondern
-              auch ästhetisch ansprechend und intuitiv nutzbar sind. Wenn Sie
-              auf der Suche nach einer Partnerin sind, die Ihr Projekt mit
-              Leidenschaft, Tiefgang und technischer Expertise umsetzt, lade ich
-              Sie herzlich ein, gemeinsam mit mir etwas Einzigartiges zu
-              schaffen.
+              Herzlich willkommen! Ich bin Sprachwissenschaftlerin, Übersetzerin
+              und Full-Stack-Entwicklerin – eine Brückenbauerin zwischen der
+              analogen und digitalen Welt. Schon immer war Sprache meine
+              Leidenschaft: die feinen Nuancen, die tiefen Bedeutungen und die
+              Kraft, Menschen und Kulturen miteinander zu verbinden. Diese
+              Faszination hat sich erweitert, als ich die Welt der
+              Programmierung entdeckte – ein kreativer Prozess, bei dem Ideen in
+              funktionale und ansprechende digitale Anwendungen übersetzt
+              werden. Mit fundierter Expertise im MERN-Stack (MongoDB, Express,
+              React, Node.js) entwickle ich moderne Full-Stack-Webapplikationen,
+              die nicht nur ästhetisch überzeugen, sondern auch intuitiv nutzbar
+              sind und höchste technische Standards erfüllen. Wenn Sie eine
+              Partnerin suchen, die Sprache und Technologie auf einzigartige
+              Weise kombiniert, um Ihr Projekt mit Leidenschaft, Präzision und
+              Weitblick zum Leben zu erwecken, freue ich mich darauf, gemeinsam
+              mit Ihnen Großes zu schaffen.
             </p>
           </div>
           <div className="md:w-2/5 order-1 md:order-2 flex justify-center md:justify-start">
@@ -63,18 +63,25 @@ export default function AboutSection() {
           </div>
           <div className="md:w-3/5 text-center md:text-left">
             <p className="text-lg leading-relaxed">
-              In meinem digitalen Garten wächst und gedeiht alles, was mich
-              inspiriert – Gedanken, Ideen, Projekte. Diese Webseite ist Teil
-              davon, ein Ort, an dem ich meine Arbeit transparent mache und Raum
-              schaffe, um gemeinsam zu wachsen. Hier finden Sie Notizen und
-              Projekte, an denen ich arbeite, unfertige Entwürfe und ausgereifte
-              Ideen. Es ist eine Einladung an Sie, in meinem Garten zu
-              verweilen, mitzudenken, zu diskutieren und vielleicht sogar
-              gemeinsam Neues zu erschaffen. Denn ich glaube, dass Wissen und
-              Kreativität lebendig bleiben, wenn sie geteilt werden. Ich lade
-              Sie herzlich ein, diesen Raum mit mir zu gestalten und an meiner
-              Entwicklung teilzuhaben – und wer weiß, vielleicht auch eigene
-              Wurzeln in diesem Garten zu schlagen.
+              Willkommen in meinem Digitalen Garten – einem Ort des Wachstums
+              und der Inspiration. Hier wurzeln meine Ideen, Projekte und
+              Technologien in fruchtbarem Boden und gedeihen zu etwas Neuem.
+              Dieser Garten ist nicht nur eine Metapher, sondern ein lebendiges
+              System, in dem Sprache, Code und Kreativität miteinander
+              verflochten sind. Ich teile hier nicht nur fertige Werke, sondern
+              auch Entwürfe, Gedanken und Herausforderungen – alles, was die
+              Entwicklung vorantreibt. Transparenz steht im Mittelpunkt: Meine
+              Arbeit wächst sichtbar, wie ein Text, der mit jeder Revision
+              präziser wird, oder eine Anwendung, die durch Iterationen an Tiefe
+              gewinnt. Es ist ein Raum für Austausch und Kollaboration, in dem
+              wir gemeinsam wachsen können. Sprache und Technologie sind für
+              mich Werkzeuge, um komplexe Systeme zu formen und gleichzeitig
+              Verbindungen zu schaffen – zwischen Menschen, Ideen und neuen
+              Möglichkeiten. Ich lade Sie ein, diesen Garten mit mir zu
+              betreten: Mitzugestalten, mitzudenken und vielleicht auch eigene
+              Wurzeln in diesem System zu schlagen. Denn wie in der Natur
+              entsteht auch hier Großes, wenn wir teilen, reflektieren und
+              gemeinsam Neues wagen.
             </p>
           </div>
         </motion.div>
