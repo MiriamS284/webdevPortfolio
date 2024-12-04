@@ -14,6 +14,7 @@ import Navigation from "./_components/Navigation";
 import ContactForm from "./_components/ContactForm";
 //import HorizontalScroll from "./_components/HorizontalScroll";
 import DynamicSlider from "./_components/ProjectSlider";
+import DigitalGarden from "./_components/DigitalerGarden";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -32,7 +33,7 @@ export default function Page() {
     "<span>FULL STACK</span> Web Development",
     "<span className='text-stone-400' >FULL STACK</span> App Development",
     "<span className='text-stone-400' >FULL STACK</span> Front & Back Development",
-    "<span className='text-stone-400' >FULL STACK</span> Localisation & Translation",
+    "<span className='text-stone-400' >FULL STACK</span> Lokalisieren, Übersetzen & Entwickeln",
     "<span className='text-stone-400' >FREELANCE</span> Developer & Translator",
   ];
 
@@ -221,17 +222,20 @@ export default function Page() {
               </h1>
               <div ref={introCopyRef}>
                 <p className="text-[16px] font-medium text-justify text-[#a8a29e] leading-[130%] relative mt-[0.75em] translate-x-[20px] opacity-0">
-                  Ich bin Web-Entwicklerin mit Fokus auf die Verbindung von
-                  Kreativität und Funktionalität – ich erschaffe moderne,
-                  nutzerzentrierte Weblösungen. Dabei kombiniere ich technisches
-                  Know-how mit einem tiefen Verständnis für Sprache und Design,
-                  um digitale Erlebnisse zu gestalten, die inspirieren und
-                  überzeugen.
+                  Ich bin Web-Entwicklerin mit dem Fokus auf funktionale und
+                  moderne Web-Applikationen. Dabei fasziniert mich besonders das
+                  Zusammenspiel von Sprache im Front- und Backend-Bereich – ein
+                  kreatives Spiel, das Schnittstellen verständlich und effizient
+                  macht. Mit technischem Know-how und einer Leidenschaft für
+                  klare Strukturen schaffe ich digitale Lösungen, die nicht nur
+                  zuverlässig funktionieren, sondern auch einen echten Mehrwert
+                  bieten.
                 </p>
                 <p className="text-[16px] font-medium text-justify text-[#a8a29e] leading-[130%] relative mt-[0.75em] translate-x-[20px] opacity-0">
-                  In meinem Digitalen Garten teile ich meine Arbeit transparent,
-                  fördere den Austausch und lade dazu ein, gemeinsam an
-                  nachhaltigen Projekten zu wachsen.
+                  Mein digitaler Garten lädt dazu ein, meine Arbeit
+                  nachzuvollziehen, Feedback zu geben und aktiv mitzuwirken. Er
+                  ist ein lebendiger Raum für Austausch, gemeinsames Lernen und
+                  nachhaltige digitale Projekte.
                 </p>
               </div>
             </div>
@@ -297,17 +301,7 @@ export default function Page() {
             {/* <HorizontalScroll /> */}
             <DynamicSlider />
           </section>
-          {/*
-          <section
-            id="development"
-            className="bg-[#44403c] w-screen h-[300vh] flex justify-center items-center relative"
-          >
-            <div className="section-title fixed top-0 left-0 w-full h-[60px] flex items-center justify-center bg-[#44403c] text-[#fafaf9] text-lg opacity-0">
-              Development - Mode - Projekte
-            </div>
-            Entwicklungsumgebung
-          </section>
-          */}
+
           <section
             id="seed"
             className="bg-[#44403c] w-screen min-h-screen flex justify-center items-center relative"
@@ -315,7 +309,7 @@ export default function Page() {
             <div className="bg-opacity-50 section-title fixed top-0 left-0 w-full h-[60px] flex items-center justify-center bg-[#fafaf9] text-[#44403c] text-lg opacity-8">
               Gedanken & Konzeptionelle Ideen
             </div>
-            Seedling - Blog
+            <DigitalGarden />
           </section>
           <section
             id="contact"

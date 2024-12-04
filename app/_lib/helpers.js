@@ -19,7 +19,8 @@ export const sanitizeAndParse = (content) => {
             href={node.attribs.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="underline text-blue-600 hover:text-blue-800"
+            className="text-stone-400 italic"
+            style={{ textDecoration: "none" }}
           >
             {domToReact(node.children, options)}
           </a>

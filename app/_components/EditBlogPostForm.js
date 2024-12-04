@@ -4,10 +4,23 @@ import { useState, useEffect } from "react";
 import TextEditor from "./TextEditor";
 import ImageUploader from "./ImageUploader";
 
+const categoriesList = [
+  "Technologien und Tools",
+  "Best Practices",
+  "UI/UX-Innovationen",
+  "Open Source & Community",
+  "Web-Entwicklung & Wissensarchitektur",
+  "Case Studies",
+  "Inspiration & Trends",
+  "Tools & Ressourcen",
+  "Wissensmanagement und Kreativität",
+];
+
 const EditBlogPostForm = ({ initialData, onRequestClose, onSave }) => {
   const [title, setTitle] = useState("");
   const [excerpt, setExcerpt] = useState("");
   const [sections, setSections] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   // Aktualisiere den Zustand, wenn sich `initialData` ändert
   useEffect(() => {
@@ -15,6 +28,7 @@ const EditBlogPostForm = ({ initialData, onRequestClose, onSave }) => {
       setTitle(initialData.title || "");
       setExcerpt(initialData.excerpt || "");
       setSections(initialData.sections || []);
+      setSelectedCategories(initialData.categories || []);
     }
   }, [initialData]);
 
@@ -30,6 +44,16 @@ const EditBlogPostForm = ({ initialData, onRequestClose, onSave }) => {
     setSections(updatedSections);
   };
 
+  const handleCategoryChange = (category) => {
+    if (selectedCategories.includes(category)) {
+      setSelectedCategories(
+        selectedCategories.filter((cat) => cat !== category)
+      );
+    } else {
+      setSelectedCategories([...selectedCategories, category]);
+    }
+  };
+
   const addTextSection = () => {
     setSections([...sections, { type: "text", content: "" }]);
   };
@@ -40,7 +64,13 @@ const EditBlogPostForm = ({ initialData, onRequestClose, onSave }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave({ ...initialData, title, excerpt, sections });
+    onSave({
+      ...initialData,
+      title,
+      excerpt,
+      sections,
+      categories: selectedCategories,
+    });
   };
 
   return (
@@ -76,6 +106,29 @@ const EditBlogPostForm = ({ initialData, onRequestClose, onSave }) => {
           />
         </div>
 
+        {/* Kategorien */}
+        <div className="mb-4">
+          <label htmlFor="categories" className="block text-sm font-medium">
+            Kategorien
+          </label>
+          <div className="flex flex-wrap gap-2 mt-2">
+            {categoriesList.map((category) => (
+              <label
+                key={category}
+                className="flex items-center space-x-2 text-sm bg-gray-100 p-2 rounded"
+              >
+                <input
+                  type="checkbox"
+                  value={category}
+                  checked={selectedCategories.includes(category)}
+                  onChange={() => handleCategoryChange(category)}
+                />
+                <span>{category}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
         {/* Abschnitte */}
         <div className="mb-4">
           <label className="block text-sm font-medium">Abschnitte</label>
@@ -83,13 +136,13 @@ const EditBlogPostForm = ({ initialData, onRequestClose, onSave }) => {
             <div key={`${section.type}-${index}`} className="mb-4">
               {section.type === "text" ? (
                 <TextEditor
-                  value={section.content} // Inhalt des Abschnitts
+                  value={section.content}
                   onChange={(content) => handleSectionChange(index, content)}
                 />
               ) : (
                 <ImageUploader
                   setImageUrl={(imageUrl) => handleImageUpload(index, imageUrl)}
-                  initialImageUrl={section.content} // Anfangsbild-URL
+                  initialImageUrl={section.content}
                 />
               )}
             </div>

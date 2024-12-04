@@ -103,7 +103,6 @@ export default function DynamicSlider() {
         ))}
       </motion.div>
 
-      {/* Modal */}
       {modalVisible && modalData && (
         <motion.div
           className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
@@ -116,13 +115,10 @@ export default function DynamicSlider() {
             className="bg-stone-100 rounded-lg max-w-[900px] w-full max-h-[100vh] overflow-hidden relative flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Scrollable Content */}
             <div
               className={`overflow-y-auto p-6 ${styles["scrollable-content"]}`}
             >
-              {/* Row: Title Image and Description */}
               <div className="flex flex-row gap-6">
-                {/* Left: Title Image */}
                 <div className="flex-shrink-0 w-1/3 flex flex-col gap-4">
                   <Image
                     alt={modalData.title}
@@ -132,7 +128,6 @@ export default function DynamicSlider() {
                     className="object-cover rounded-md"
                   />
 
-                  {/* Links: GitHub & Live */}
                   <div className="flex flex-row gap-4 mt-4">
                     {modalData.repoLink && (
                       <a
@@ -157,7 +152,6 @@ export default function DynamicSlider() {
                   </div>
                 </div>
 
-                {/* Right: Title and Description */}
                 <div className="flex-1">
                   <h2 className="text-2xl font-bold">
                     {sanitizeAndParse(modalData.title)}
@@ -166,7 +160,6 @@ export default function DynamicSlider() {
                     {sanitizeAndParse(modalData.description)}
                   </div>
 
-                  {/* Category and Tech Stack */}
                   <div className="grid grid-cols-2 gap-4 mt-4">
                     <div>
                       <h3 className="text-sm font-medium text-gray-500">
@@ -190,12 +183,10 @@ export default function DynamicSlider() {
                 </div>
               </div>
 
-              {/* Slider Section */}
               <div className="mt-6">
                 <ImageSlider images={modalData.layoutImages} />
               </div>
 
-              {/* Additional Details */}
               <div className="grid grid-cols-2 gap-6 mt-6">
                 <div>
                   <h3 className="text-sm font-medium text-stone-500">

@@ -5,18 +5,23 @@ import { toast } from "react-toastify";
 import TextEditor from "./TextEditor";
 import ImageUploader from "./ImageUploader";
 
-const generateSlug = (title) => {
-  return title
-    .toLowerCase()
-    .replace(/ /g, "-")
-    .replace(/[^\w-]+/g, "");
-};
+const categoriesList = [
+  "Technologien und Tools",
+  "Best Practices",
+  "UI/UX-Innovationen",
+  "Open Source & Community",
+  "Web-Entwicklung & Wissensarchitektur",
+  "Case Studies",
+  "Inspiration & Trends",
+  "Tools & Ressourcen",
+  "Wissensmanagement und Kreativität",
+];
 
 export default function BlogForm({ setTitle, setSections }) {
   const [localTitle, setLocalTitle] = useState("");
-  const [localExcerpt, setLocalExcerpt] = useState(""); // Neuer State für Kurzbeschreibung
+  const [localExcerpt, setLocalExcerpt] = useState("");
   const [localSections, setLocalSections] = useState([]);
-  const [slug, setSlug] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   const addTextSection = () => {
     const updatedSections = [...localSections, { type: "text", content: "" }];
@@ -44,6 +49,16 @@ export default function BlogForm({ setTitle, setSections }) {
     setSections(updatedSections);
   };
 
+  const handleCategoryChange = (category) => {
+    if (selectedCategories.includes(category)) {
+      setSelectedCategories(
+        selectedCategories.filter((cat) => cat !== category)
+      );
+    } else {
+      setSelectedCategories([...selectedCategories, category]);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -54,8 +69,6 @@ export default function BlogForm({ setTitle, setSections }) {
       return;
     }
 
-    const finalSlug = slug ? slug : generateSlug(localTitle);
-
     try {
       const response = await fetch("/api/blog", {
         method: "POST",
@@ -64,9 +77,9 @@ export default function BlogForm({ setTitle, setSections }) {
         },
         body: JSON.stringify({
           title: localTitle,
-          slug: finalSlug,
-          excerpt: localExcerpt, // Kurzbeschreibung hinzufügen
+          excerpt: localExcerpt,
           sections: localSections,
+          categories: selectedCategories,
         }),
       });
 
@@ -75,7 +88,7 @@ export default function BlogForm({ setTitle, setSections }) {
         setLocalTitle("");
         setLocalExcerpt("");
         setLocalSections([]);
-        setSlug("");
+        setSelectedCategories([]);
       } else {
         toast.error("Fehler beim Erstellen des Blogposts.");
       }
@@ -115,17 +128,22 @@ export default function BlogForm({ setTitle, setSections }) {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="slug" className="block text-sm font-medium">
-            Slug (optional, wird automatisch aus dem Titel generiert, wenn leer)
+          <label htmlFor="categories" className="block text-sm font-medium">
+            Kategorien
           </label>
-          <input
-            id="slug"
-            type="text"
-            value={slug}
-            onChange={(e) => setSlug(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md"
-            placeholder="Geben Sie einen benutzerdefinierten Slug ein"
-          />
+          <div className="flex flex-wrap gap-2">
+            {categoriesList.map((category) => (
+              <label key={category} className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  value={category}
+                  checked={selectedCategories.includes(category)}
+                  onChange={() => handleCategoryChange(category)}
+                />
+                <span>{category}</span>
+              </label>
+            ))}
+          </div>
         </div>
 
         <div className="mb-4">

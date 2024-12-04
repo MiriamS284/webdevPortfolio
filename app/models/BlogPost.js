@@ -6,11 +6,7 @@ const BlogPostSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    slug: {
-      type: String,
-      required: true,
-      unique: true,
-    },
+
     excerpt: {
       type: String,
       required: true,
@@ -27,6 +23,10 @@ const BlogPostSchema = new mongoose.Schema(
         },
       },
     ],
+    categories: {
+      type: [String],
+      required: true,
+    },
   },
   {
     timestamps: true,

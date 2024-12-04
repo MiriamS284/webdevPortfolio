@@ -3,64 +3,43 @@ import BlogPost from "../../models/BlogPost";
 
 export async function GET(req) {
   await connectToDatabase();
-  const { searchParams } = new URL(req.url);
-  const slug = searchParams.get("slug");
-
   try {
-    if (slug) {
-      // Einzelner Artikel basierend auf `slug`
-      const blogPost = await BlogPost.findOne({ slug });
-      if (!blogPost) {
-        return new Response(
-          JSON.stringify({ error: "Blogpost nicht gefunden" }),
-          { status: 404, headers: { "Content-Type": "application/json" } }
-        );
-      }
-      return new Response(JSON.stringify(blogPost), {
-        status: 200,
-        headers: { "Content-Type": "application/json" },
-      });
-    } else {
-      // Alle Artikel zurückgeben, inklusive `sections`
-      const blogPosts = await BlogPost.find({});
-      return new Response(JSON.stringify(blogPosts), {
-        status: 200,
-        headers: { "Content-Type": "application/json" },
-      });
-    }
+    const blogPosts = await BlogPost.find({});
+
+    return new Response(JSON.stringify(blogPosts), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (error) {
+    console.error("Error fetching BlogPosts:", error);
     return new Response(
       JSON.stringify({ error: "Fehler beim Abrufen der Blogposts" }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      }
+      { status: 500, headers: { "Content-Type": "application/json" } }
     );
   }
 }
-
 export async function POST(req) {
   await connectToDatabase();
 
   try {
-    const { title, slug, excerpt, sections } = await req.json();
+    const { title, excerpt, sections, categories } = await req.json();
+    console.log("Empfangene Daten:", { title, excerpt, sections, categories });
 
-    const existingPost = await BlogPost.findOne({ slug });
-    if (existingPost) {
+    if (!title || !excerpt || !sections) {
       return new Response(
-        JSON.stringify({
-          error: "Ein Blogpost mit diesem Slug existiert bereits.",
-        }),
+        JSON.stringify({ error: "Fehlende Felder im Request" }),
         { status: 400, headers: { "Content-Type": "application/json" } }
       );
     }
 
     const newPost = new BlogPost({
       title,
-      slug,
       excerpt,
-      sections: sections || [],
+      sections,
+      categories: categories || [],
     });
+
+    console.log("Zu speichernde Daten:", newPost);
 
     await newPost.save();
 
@@ -69,6 +48,7 @@ export async function POST(req) {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
+    console.error("Fehler beim Erstellen des Blogposts:", error);
     return new Response(
       JSON.stringify({ error: "Fehler beim Erstellen des Blogposts" }),
       {
@@ -83,28 +63,20 @@ export async function PUT(req) {
   await connectToDatabase();
 
   try {
-    const { id, title, slug, excerpt, sections } = await req.json();
-
-    if (!id) {
-      return new Response(JSON.stringify({ error: "Blogpost ID fehlt" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
-    }
+    const { id, title, excerpt, sections, categories } = await req.json();
+    console.log("Empfangene Kategorien:", categories);
 
     const updatedPost = await BlogPost.findByIdAndUpdate(
       id,
-      { title, slug, excerpt, sections },
+      { title, excerpt, sections, categories },
       { new: true }
     );
+    console.log("Aktualisierte Kategorien:", updatedPost.categories);
 
     if (!updatedPost) {
       return new Response(
         JSON.stringify({ error: "Blogpost nicht gefunden" }),
-        {
-          status: 404,
-          headers: { "Content-Type": "application/json" },
-        }
+        { status: 404, headers: { "Content-Type": "application/json" } }
       );
     }
 
@@ -113,16 +85,13 @@ export async function PUT(req) {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
+    console.error("Fehler beim Aktualisieren des Blogposts:", error);
     return new Response(
       JSON.stringify({ error: "Fehler beim Aktualisieren des Blogposts" }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      }
+      { status: 500, headers: { "Content-Type": "application/json" } }
     );
   }
 }
-
 export async function DELETE(req) {
   await connectToDatabase();
 

@@ -13,14 +13,11 @@ export default function BlogList() {
     async function fetchBlogPosts() {
       try {
         const response = await fetch("/api/blog");
-        if (!response.ok)
-          throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+        if (!response.ok) throw new Error("Fehler beim Laden der Blogposts");
         const data = await response.json();
-        console.log("Geladene Blogposts:", data);
         setBlogPosts(data);
       } catch (error) {
-        console.error("Fehler beim Abrufen der Blogposts:", error);
-        setError("Es gab ein Problem beim Laden der Blogposts.");
+        setError("Fehler beim Laden der Blogposts.");
       }
     }
 
@@ -31,7 +28,7 @@ export default function BlogList() {
     setActiveMenu(activeMenu === postId ? null : postId);
   };
 
-  if (blogPosts === null) return <p>Lade Blogposts...</p>;
+  if (!blogPosts) return <p>Lade Blogposts...</p>;
 
   return (
     <div className="bg-white p-4 rounded-lg shadow-lg">
@@ -48,7 +45,7 @@ export default function BlogList() {
                 <p className="text-sm text-gray-500">
                   {post.createdAt
                     ? new Date(post.createdAt).toLocaleDateString("de-DE")
-                    : "Kein Datum vorhanden"}
+                    : "Kein Datum"}
                 </p>
               </div>
 
@@ -61,26 +58,24 @@ export default function BlogList() {
                 </div>
 
                 {activeMenu === post._id && (
-                  <div className="absolute right-0 mt-2 bg-white shadow-lg rounded p-2 z-10">
-                    <ActionMenu
-                      blogPost={post}
-                      onUpdate={(updatedPost) => {
-                        setBlogPosts((prevPosts) =>
-                          prevPosts.map((p) =>
-                            p._id === updatedPost._id ? updatedPost : p
-                          )
-                        );
-                      }}
-                      onDelete={(deletedId) => {
-                        setBlogPosts((prevPosts) =>
-                          prevPosts.filter((p) => p._id !== deletedId)
-                        );
-                      }}
-                      onAdd={(newPost) => {
-                        setBlogPosts((prevPosts) => [...prevPosts, newPost]);
-                      }}
-                    />
-                  </div>
+                  <ActionMenu
+                    blogPost={post}
+                    onUpdate={(updatedPost) =>
+                      setBlogPosts((prev) =>
+                        prev.map((p) =>
+                          p._id === updatedPost._id ? updatedPost : p
+                        )
+                      )
+                    }
+                    onDelete={(deletedId) =>
+                      setBlogPosts((prev) =>
+                        prev.filter((p) => p._id !== deletedId)
+                      )
+                    }
+                    onAdd={(newPost) =>
+                      setBlogPosts((prev) => [...prev, newPost])
+                    }
+                  />
                 )}
               </div>
             </li>
