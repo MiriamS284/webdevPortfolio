@@ -538,19 +538,31 @@ const sections = [
 const CircleLayout = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
-  const radius = 300;
-  const circleSize = 150;
+  const radius = 300; // Radius des äußeren Kreises
+  const circleSize = 150; // Größe der Kreise im Normalzustand
+
+  // Dynamische Positionen nur auf dem Client berechnen
+  const positions =
+    typeof window !== "undefined"
+      ? sections.map((_, index) => {
+          const angle = (index / sections.length) * 2 * Math.PI;
+          return {
+            x: Math.cos(angle) * radius,
+            y: Math.sin(angle) * radius,
+          };
+        })
+      : [];
 
   return (
     <div className="relative flex items-center justify-center w-full h-[700px]">
-      <h2 className="absolute text-3xl font-bold text-stone-300 text-center">
-        Tools & Ressourcen
-      </h2>
-      {sections.map((section, index) => {
-        const angle = (index / sections.length) * 2 * Math.PI;
-        const x = Math.cos(angle) * radius;
-        const y = Math.sin(angle) * radius;
+      {!hoveredIndex && (
+        <h2 className="absolute text-3xl font-bold text-stone-300 text-center">
+          Tools & Ressourcen
+        </h2>
+      )}
 
+      {sections.map((section, index) => {
+        const { x, y } = positions[index] || { x: 0, y: 0 };
         const isHovered = hoveredIndex === index;
 
         return (
@@ -558,47 +570,75 @@ const CircleLayout = () => {
             key={index}
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
-            className="absolute flex items-center justify-center"
-            style={{
-              transform: `translate(${x}px, ${y}px)`,
-              width: isHovered ? "250px" : `${circleSize}px`,
-              height: isHovered ? "250px" : `${circleSize}px`,
+            initial={{
+              x,
+              y,
+              width: circleSize,
+              height: circleSize,
               borderRadius: "50%",
-              backgroundColor: isHovered ? "#e5e7eb" : "#57534e",
-              transition: "all 0.4s ease-in-out",
-              boxShadow: isHovered
-                ? "0px 10px 20px rgba(0, 0, 0, 0.4)"
-                : "0px 4px 6px rgba(0, 0, 0, 0.1)",
+              backgroundColor: "#57534e",
             }}
+            animate={
+              isHovered
+                ? {
+                    x: 0,
+                    y: 0,
+                    width: 350,
+                    height: "auto",
+                    borderRadius: "16px",
+                    backgroundColor: "#e5e7eb",
+                  }
+                : {
+                    x,
+                    y,
+                    width: circleSize,
+                    height: circleSize,
+                    borderRadius: "50%",
+                    backgroundColor: "#57534e",
+                  }
+            }
+            transition={{
+              type: "spring",
+              stiffness: isHovered ? 120 : 300,
+              damping: 20,
+            }}
+            className={`absolute flex flex-col items-center justify-center text-center shadow-lg overflow-hidden ${
+              isHovered ? "z-10" : "z-0"
+            }`}
           >
             {!isHovered ? (
-              <h3 className="text-white text-lg font-semibold text-center">
+              <h3 className="text-white text-lg font-semibold">
                 {section.title}
               </h3>
             ) : (
               <motion.div
-                className="flex flex-col items-center justify-center space-y-2 text-center"
-                initial={{ scale: 0.5, opacity: 0 }}
+                className="flex flex-col items-center justify-start space-y-2 p-4 max-h-[400px] overflow-y-auto"
+                initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.4 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 150,
+                  damping: 20,
+                  delay: 0.2,
+                }}
               >
-                <h3 className="text-lg font-semibold text-gray-800">
+                <h3 className="text-lg font-semibold text-gray-800 mb-2">
                   {section.title}
                 </h3>
-                <ul className="space-y-1">
+                <ul className="space-y-2">
                   {section.resources.map((resource, idx) => (
                     <li
                       key={idx}
-                      className="flex items-center justify-center space-x-2"
+                      className="flex items-center space-x-2 hover:scale-105 transition-transform"
                     >
-                      <span className="text-gray-600 text-lg">
+                      <span className="text-xl text-stone-600">
                         {resource.icon}
                       </span>
                       <Link
                         href={resource.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm text-gray-600 hover:text-gray-800"
+                        className="text-sm text-stone-600 hover:text-stone-800"
                       >
                         {resource.name}
                       </Link>

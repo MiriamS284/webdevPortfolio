@@ -23,8 +23,8 @@ export default function DynamicSlider() {
     offset: ["start end", "end start"],
   });
 
-  const x1 = useTransform(scrollYProgress, [0, 1], [0, 150]); // Production Slider
-  const x2 = useTransform(scrollYProgress, [0, 1], [0, -150]); // Development Slider
+  const x1 = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const x2 = useTransform(scrollYProgress, [0, 1], [0, -150]);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -59,7 +59,6 @@ export default function DynamicSlider() {
       ref={container}
       className="flex flex-col gap-20 relative mt-20 z-10 px-2 min-h-[100vh] max-w-[1400px] mx-auto"
     >
-      {/* Production Slider */}
       <motion.div
         style={{ x: x1 }}
         className="flex gap-16 w-full overflow-hidden"
@@ -81,7 +80,6 @@ export default function DynamicSlider() {
         ))}
       </motion.div>
 
-      {/* Development Slider */}
       <motion.div
         style={{ x: x2 }}
         className="flex gap-16 w-full overflow-hidden"

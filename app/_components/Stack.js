@@ -7,7 +7,6 @@ import {
   AiOutlineWindows,
   AiOutlineLinux,
   AiOutlineHtml5,
-  AiOutlineRobot,
 } from "react-icons/ai";
 import { FaNodeJs } from "react-icons/fa";
 import {
@@ -21,7 +20,6 @@ import {
   SiMocha,
   SiTestinglibrary,
   SiLighthouse,
-  SiOpenaigym,
   SiOpenai,
 } from "react-icons/si";
 import { FaPhp } from "react-icons/fa6";
