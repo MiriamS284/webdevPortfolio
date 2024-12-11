@@ -1,56 +1,30 @@
 "use client";
-import { useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+import { useInView } from "react-intersection-observer";
+import SectionTitleOverlay from "./SectionTitleOverlay";
 
-export default function SectionTitles() {
-  useEffect(() => {
-    const sections = document.querySelectorAll("section");
+const SectionWithTitle = ({
+  id,
+  title,
+  isDarkBackground,
+  children,
+  className,
+}) => {
+  const { ref, inView } = useInView({ threshold: 0.5 });
 
-    sections.forEach((section) => {
-      const title = section.querySelector(".section-title");
+  console.log(`Section ${id} is in view: ${inView}`); // Debug-Ausgabe
 
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top center",
-        end: "bottom center",
-        onEnter: () => {
-          gsap.to(title, {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            ease: "power2.out",
-          });
-        },
-        onLeave: () => {
-          gsap.to(title, {
-            opacity: 0,
-            y: -20, // Leicht nach oben verschieben
-            duration: 0.5,
-            ease: "power2.in",
-          });
-        },
-        onEnterBack: () => {
-          gsap.to(title, {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            ease: "power2.out",
-          });
-        },
-        onLeaveBack: () => {
-          gsap.to(title, {
-            opacity: 0,
-            y: 20,
-            duration: 0.5,
-            ease: "power2.in",
-          });
-        },
-      });
-    });
-  }, []);
+  return (
+    <section id={id} ref={ref} className={`${className} relative`}>
+      {inView && (
+        <SectionTitleOverlay
+          title={title}
+          isDarkBackground={isDarkBackground}
+        />
+      )}
+      <div className="relative z-0">{children}</div>
+    </section>
+  );
+};
 
-  return null;
-}
+export default SectionWithTitle;

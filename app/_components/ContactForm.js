@@ -4,8 +4,8 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function ContactForm() {
-  const [isFormVisible, setIsFormVisible] = useState(false); // Sichtbarkeit des Formulars
-  const [isSubmitted, setIsSubmitted] = useState(false); // Status für die Dankesnachricht
+  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -33,7 +33,7 @@ export default function ContactForm() {
       });
 
       if (response.ok) {
-        setIsSubmitted(true); // Dankesnachricht anzeigen
+        setIsSubmitted(true);
         setFormData({
           firstName: "",
           lastName: "",
@@ -43,10 +43,9 @@ export default function ContactForm() {
           message: "",
         });
 
-        // Formular nach 5 Sekunden zurücksetzen
         setTimeout(() => {
           setIsSubmitted(false);
-          setIsFormVisible(false); // Formular einklappen
+          setIsFormVisible(false);
         }, 5000);
       } else {
         alert("Fehler beim Senden der E-Mail.");
@@ -62,7 +61,7 @@ export default function ContactForm() {
   return (
     <div className="flex h-screen px-4">
       <div className="hidden md:flex items-start justify-end w-1/4 pr-1 pt-4">
-        <span className="text-stone-200 text-3xl mt-4 tracking-widest">
+        <span className="text-stone-300 text-3xl mt-4 tracking-widest">
           KONTAKT
         </span>
       </div>
@@ -70,7 +69,7 @@ export default function ContactForm() {
       <div
         className={`${
           isFormVisible ? "bg-stone-200" : ""
-        } text-stone-400 tracking-widest w-full max-w-[700px] p-8 space-y-4 transition-all duration-500`}
+        } text-stone-500 tracking-widest w-full max-w-[700px] p-8 space-y-4 transition-all duration-500`}
       >
         <h2
           onClick={() => setIsFormVisible(!isFormVisible)}

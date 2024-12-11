@@ -1,26 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-import { motion } from "framer-motion";
 import {
   AiOutlineWindows,
   AiOutlineLinux,
   AiOutlineHtml5,
 } from "react-icons/ai";
-import { FaNodeJs } from "react-icons/fa";
+import { FaAws, FaNodeJs } from "react-icons/fa";
 import {
   SiExpress,
   SiMongodb,
   SiTailwindcss,
-  SiJquery,
   SiNginx,
-  SiHeroku,
   SiJest,
   SiMocha,
-  SiTestinglibrary,
   SiLighthouse,
   SiOpenai,
+  SiNestjs,
+  SiGraphql,
+  SiCypress,
+  SiPlaywright,
+  SiRedis,
+  SiSqlite,
+  SiFramer,
+  SiChakraui,
+  SiOwasp,
 } from "react-icons/si";
 import { FaPhp } from "react-icons/fa6";
 import {
@@ -29,347 +32,328 @@ import {
   TbBrandTypescript,
   TbBrandJavascript,
   TbBrandNextjs,
-  TbBrandBootstrap,
   TbBrandVercel,
   TbBrandGithub,
   TbBrandDocker,
   TbBrandGithubCopilot,
-  TbBrandOpenai,
+  TbBrandSentry,
 } from "react-icons/tb";
 import { GrReactjs } from "react-icons/gr";
-import { BsFiletypeJson } from "react-icons/bs";
+
+import { useRef } from "react";
+import { useScroll, useTransform, motion } from "framer-motion";
+import { VscJson } from "react-icons/vsc";
+import { BiLogoKubernetes } from "react-icons/bi";
+import { GiSamuraiHelmet } from "react-icons/gi";
 
 export default function Stack() {
-  const [visibleStacks, setVisibleStacks] = useState([]);
+  const container = useRef(null);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      for (let i = 0; i < sections.length; i++) {
-        setTimeout(() => {
-          setVisibleStacks((prev) => [...prev, i]);
-        }, i * 400);
-      }
-    }, 3000);
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start end", "end start"],
+  });
 
-    return () => clearTimeout(timer);
-  }, []);
-
-  const directions = [
-    { x: -100, y: 0 },
-    { x: 100, y: 0 },
-    { x: 0, y: -100 },
-    { x: 0, y: 100 },
-    { x: -100, y: 100 },
-    { x: 100, y: -100 },
-    { x: -100, y: -100 },
-    { x: 100, y: 100 },
-    { x: 0, y: 100 },
-  ];
+  const x1 = useTransform(scrollYProgress, [0, 1], [-700, 800]);
+  const x2 = useTransform(scrollYProgress, [0, 1], [0, -800]);
 
   const sections = [
     {
-      title: "1. Operating System",
-      content: (
-        <div className="flex flex-col items-center space-y-4 pt-4">
-          <div className="flex flex-col items-center group">
-            <AiOutlineWindows />
-            <span className="text-xs">Windows</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (Server & Development environments)
-            </span>
-          </div>
-          <div className="flex flex-col items-center group">
-            <AiOutlineLinux />
-            <span className="text-xs">Linux (Ubuntu)</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (Server-side environments)
-            </span>
-          </div>
-        </div>
-      ),
+      title: "Web Server & Operating System",
+      content: [
+        {
+          icon: <AiOutlineWindows />,
+          label: "Windows",
+          description: "Server & Development environments",
+        },
+        {
+          icon: <AiOutlineLinux />,
+          label: "Linux (Ubuntu)",
+          description: "Server-side environments",
+        },
+        {
+          icon: <SiNginx />,
+          label: "NGINX",
+          description: "High-performance web server",
+        },
+        {
+          icon: <SiExpress />,
+          label: "Express.js",
+          description: "Doubles as a web server in Node.js apps",
+        },
+      ],
     },
     {
-      title: "2. Server-Side Programming",
-      content: (
-        <div className="flex flex-col items-center space-y-4 pt-4">
-          <div className="flex flex-col items-center group">
-            <FaNodeJs />
-            <span className="text-xs">Node.js</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (JavaScript runtime, core of the MERN stack)
-            </span>
-          </div>
-          <div className="flex flex-col items-center group">
-            <SiExpress />
-            <span className="text-xs">Express.js</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (Web framework for Node.js, MERN)
-            </span>
-          </div>
-          <div className="flex flex-col items-center group">
-            <FaPhp />
-            <span className="text-xs">PHP</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (Popular server-side scripting, particularly for CMS)
-            </span>
-          </div>
-        </div>
-      ),
+      title: "Server-Side Programming",
+      content: [
+        {
+          icon: <FaNodeJs />,
+          label: "Node.js",
+          description: "JavaScript runtime, merN Stack",
+        },
+        {
+          icon: <SiExpress />,
+          label: "Express.js",
+          description: "Web framework for Node.js, mErn Stack",
+        },
+        {
+          icon: <FaPhp />,
+          label: "PHP",
+          description: "Popular server-side scripting",
+        },
+        {
+          icon: <SiNestjs />,
+          label: "NestJS",
+          description:
+            "Node.js framework for efficient & scalable server-side applications",
+        },
+        {
+          icon: <SiGraphql />,
+          label: "GraphQL (Apollo)",
+          description: "Efficient & flexible API development",
+        },
+      ],
     },
     {
-      title: "3. Testing Tools",
-      content: (
-        <div className="flex flex-col items-center space-y-4 pt-4">
-          <div className="flex flex-col items-center group">
-            <SiJest />
-            <span className="text-xs">Jest</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (Unit and Integration Testing for JavaScript)
-            </span>
-          </div>
-          <div className="flex flex-col items-center group">
-            <SiMocha />
-            <span className="text-xs">Mocha</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (Testing framework for asynchronous JS code)
-            </span>
-          </div>
-          <div className="flex flex-col items-center group">
-            <SiTestinglibrary />
-            <span className="text-xs">Testing Library</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (For testing React components in a real browser environment)
-            </span>
-          </div>
-          <div className="flex flex-col items-center group">
-            <SiLighthouse />
-            <span className="text-xs">Lighthouse</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (Performance Testing)
-            </span>
-          </div>
-        </div>
-      ),
+      title: "Testing Tools",
+      content: [
+        {
+          icon: <SiJest />,
+          label: "Jest",
+          description: "Unit and Integration Testing",
+        },
+        {
+          icon: <SiMocha />,
+          label: "Mocha",
+          description: "Testing framework for JS code",
+        },
+        {
+          icon: <SiLighthouse />,
+          label: "Lighthouse",
+          description: "Performance Testing",
+        },
+        {
+          icon: <SiCypress />,
+          label: "Cypress",
+          description: "End-to-End testing",
+        },
+        {
+          icon: <SiPlaywright />,
+          label: "Playwright",
+          description: "UI Automation for Cross-Browser Testing",
+        },
+      ],
+    },
+
+    {
+      title: "Database",
+      content: [
+        {
+          icon: <SiMongodb />,
+          label: "MongoDB",
+          description: "NoSQL database, Mern Stack",
+        },
+        {
+          icon: <TbBrandSupabase />,
+          label: "Supabase",
+          description: "Backend-as-a-Service based on PostgreSQL",
+        },
+        {
+          icon: <SiRedis />,
+          label: "Redis",
+          description: "In-memory database for caching",
+        },
+        {
+          icon: <SiSqlite />,
+          label: "SQLite",
+          description: "Lightweight serverless database",
+        },
+      ],
     },
     {
-      title: "4. Web Server",
-      content: (
-        <div className="flex flex-col items-center space-y-4 pt-4">
-          <div className="flex flex-col items-center group">
-            <SiNginx />
-            <span className="text-xs">NGINX</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (Lightweight, high-performance web server)
-            </span>
-          </div>
-          <div className="flex flex-col items-center group">
-            <SiExpress />
-            <span className="text-xs">Express.js</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (Doubles as a web server in Node.js apps)
-            </span>
-          </div>
-        </div>
-      ),
+      title: "Client-Side Programming",
+      content: [
+        {
+          icon: <TbBrandJavascript />,
+          label: "JavaScript",
+          description: "Core programming language for web frontends",
+        },
+        {
+          icon: <AiOutlineHtml5 />,
+          label: "HTML5",
+          description: "Markup language",
+        },
+        {
+          icon: <TbBrandCss3 />,
+          label: "CSS3",
+          description: "Styling and layout",
+        },
+        {
+          icon: <TbBrandTypescript />,
+          label: "TypeScript",
+          description: "Typed superset of JavaScript",
+        },
+      ],
     },
     {
-      title: "5. Database",
-      content: (
-        <div className="flex flex-col items-center space-y-4 pt-4">
-          <div className="flex flex-col items-center group">
-            <SiMongodb />
-            <span className="text-xs">MongoDB</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (NoSQL database, part of the MERN stack)
-            </span>
-          </div>
-          <div className="flex flex-col items-center group">
-            <TbBrandSupabase />
-            <span className="text-xs">Supabase</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (Backend-as-a-Service based on PostgreSQL)
-            </span>
-          </div>
-        </div>
-      ),
+      title: "Frontend Frameworks/Libraries",
+      content: [
+        {
+          icon: <GrReactjs />,
+          label: "React.js",
+          description: "Component-based UI library, meRn Stack",
+        },
+        {
+          icon: <TbBrandNextjs />,
+          label: "Next.js",
+          description: "React framework for server-side rendering",
+        },
+        {
+          icon: <SiTailwindcss />,
+          label: "Tailwind CSS",
+          description: "Utility-first CSS framework",
+        },
+        {
+          icon: <SiFramer />,
+          label: "Framer Motion",
+          description: "React animations library",
+        },
+        {
+          icon: <SiChakraui />,
+          label: "Chakra UI",
+          description: "Accessible & customizable UI components",
+        },
+      ],
     },
     {
-      title: "6. Client-Side Programming",
-      content: (
-        <div className="flex flex-col items-center space-y-4 pt-4">
-          <div className="flex flex-col items-center group">
-            <TbBrandJavascript />
-            <span className="text-xs">JavaScript</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (Core programming language for web frontends)
-            </span>
-          </div>
-          <div className="flex flex-col items-center group">
-            <AiOutlineHtml5 />
-            <span className="text-xs">HTML5</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (Markup language)
-            </span>
-          </div>
-          <div className="flex flex-col items-center group">
-            <TbBrandCss3 />
-            <span className="text-xs">CSS3</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (Styling and layout)
-            </span>
-          </div>
-          <div className="flex flex-col items-center group">
-            <TbBrandTypescript />
-            <span className="text-xs">Typescript</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (Typed superset of JavaScript)
-            </span>
-          </div>
-        </div>
-      ),
+      title: "Deployment & Infrastructure",
+      content: [
+        {
+          icon: <TbBrandVercel />,
+          label: "Vercel",
+          description: "Deployment platform, optimized for Next.js",
+        },
+        {
+          icon: <TbBrandGithub />,
+          label: "GitHub",
+          description: "CI/CD pipelines with GitHub Actions",
+        },
+        {
+          icon: <TbBrandDocker />,
+          label: "Docker",
+          description: "Containerized application deployment",
+        },
+        {
+          icon: <FaAws />,
+          label: "AWS",
+          description: "Cloud platform for scalable infrastructure",
+        },
+        {
+          icon: <BiLogoKubernetes />,
+          label: "Kubernetes",
+          description: "Container orchestration platform",
+        },
+      ],
     },
     {
-      title: "7. Frontend Frameworks/Libraries",
-      content: (
-        <div className="flex flex-col items-center space-y-4">
-          <div className="flex flex-col items-center group">
-            <GrReactjs />
-            <span className="text-xs">React.js</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (Core of the MERN stack, component-based UI)
-            </span>
-          </div>
-          <div className="flex flex-col items-center group">
-            <TbBrandNextjs />
-            <span className="text-xs">Next.js</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (React framework for server-side rendering)
-            </span>
-          </div>
-          <div className="flex flex-col items-center group">
-            <SiTailwindcss />
-            <span className="text-xs">Tailwind CSS</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (Utility-first CSS framework)
-            </span>
-          </div>
-          <div className="flex flex-col items-center group">
-            <TbBrandBootstrap />
-            <span className="text-xs">Bootstrap</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (CSS framework for responsive designs)
-            </span>
-          </div>
-          <div className="flex flex-col items-center group">
-            <SiJquery />
-            <span className="text-xs">jQuery</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (Older but widely used JS library)
-            </span>
-          </div>
-        </div>
-      ),
+      title: "AI Integration & Tools",
+      content: [
+        {
+          icon: <SiOpenai />,
+          label: "OpenAI API",
+          description: "Integration with OpenAI’s Language models",
+        },
+        {
+          icon: <TbBrandGithubCopilot />,
+          label: "GitHub Copilot",
+          description: "AI-powered code completion",
+        },
+        {
+          icon: <VscJson />,
+          label: "json:api",
+          description: "Specification for building apis in JSON",
+        },
+      ],
     },
     {
-      title: "8. Deployment & Infrastructure",
-      content: (
-        <div className="flex flex-col items-center space-y-4">
-          <div className="flex flex-col items-center group">
-            <TbBrandVercel />
-            <span className="text-xs">Vercel</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (Deployment platform, optimized for Next.js)
-            </span>
-          </div>
-          <div className="flex flex-col items-center group">
-            <TbBrandGithub />
-            <span className="text-xs">GitHub</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (CI/CD pipelines with GitHub Actions)
-            </span>
-          </div>
-          <div className="flex flex-col items-center group">
-            <SiNginx />
-            <span className="text-xs">NGINX</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (Reverse proxy setups)
-            </span>
-          </div>
-          <div className="flex flex-col items-center group">
-            <SiHeroku />
-            <span className="text-xs">Heroku</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (PaaS, easy cloud deployment)
-            </span>
-          </div>
-          <div className="flex flex-col items-center group">
-            <TbBrandDocker />
-            <span className="text-xs">Docker</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (Containerized application deployment)
-            </span>
-          </div>
-        </div>
-      ),
-    },
-    {
-      title: "9. AI Integration & Tools",
-      content: (
-        <div className="flex flex-col items-center space-y-4">
-          <div className="flex flex-col items-center group">
-            <SiOpenai />
-            <span className="text-xs">ChatGPT API</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (Integration with OpenAI’s GPT models for conversational and NLP
-              applications)
-            </span>
-          </div>
-          <div className="flex flex-col items-center group">
-            <TbBrandGithubCopilot />
-            <span className="text-xs">GitHub Copilot</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (AI-powered code completion and suggestions using GPT-4)
-            </span>
-          </div>
-          <div className="flex flex-col items-center group">
-            <TbBrandOpenai />
-            <span className="text-xs">OpenAI APIs</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (Utilizing AI models for automation, content generation, and more)
-            </span>
-          </div>
-          <div className="flex flex-col items-center group">
-            <BsFiletypeJson />
-            <span className="text-xs">JSON API Integration</span>
-            <span className="hidden group-hover:block text-xs bg-primary-800 text-primary-100 p-1 mt-1 rounded">
-              (Integrating AI APIs via RESTful JSON-based APIs)
-            </span>
-          </div>
-        </div>
-      ),
+      title: "Security & Monitoring",
+      content: [
+        {
+          icon: <SiOwasp />,
+          label: "OWASP ZAP",
+          description: "Security testing for web applications",
+        },
+        {
+          icon: <TbBrandSentry />,
+          label: "Sentry",
+          description: "Error and performance monitoring",
+        },
+        {
+          icon: <GiSamuraiHelmet />,
+          label: "Helmet.js",
+          description: "Security headers for Express.js apps",
+        },
+      ],
     },
   ];
 
+  const firstSlide = sections.slice(0, Math.ceil(sections.length / 2));
+  const secondSlide = sections.slice(Math.ceil(sections.length / 2));
+
   return (
-    <div className="relative hidden md:grid md:grid-cols-3 md:gap-2 p-2">
-      {sections.map((section, index) => (
-        <motion.div
-          key={index}
-          initial={{
-            opacity: 0,
-            x: directions[index % directions.length].x,
-            y: directions[index % directions.length].y,
-          }}
-          animate={
-            visibleStacks.includes(index) ? { opacity: 1, x: 0, y: 0 } : {}
-          }
-          transition={{ duration: 0.5, delay: index * 0.5 }}
-          className="p-2 bg-primary-800 text-primary-100 relative"
-        >
-          <h2 className="text-md font-bold mb-2 pt-4">{section.title}</h2>
-          <div className="text-xs text-primary-200">{section.content}</div>
-        </motion.div>
-      ))}
+    <div
+      ref={container}
+      className="relative flex flex-col items-center gap-20 w-full px-8"
+    >
+      <motion.div
+        style={{ x: x1 }}
+        className="flex gap-8 w-full max-w-[1400px] mx-auto"
+      >
+        {firstSlide.map((section, index) => (
+          <div
+            key={index}
+            className="flex flex-col p-2 bg-white/60 text-stone-600 rounded-lg shadow-lg min-w-[350px] max-w-[400px]"
+          >
+            <h2 className="text-lg font-bold mb-4">{section.title}</h2>
+            <div className="space-y-2">
+              {section.content.map((item, idx) => (
+                <div key={idx} className="flex flex-col gap-1">
+                  <div className="flex items-center gap-3">
+                    <div className="text-lg">{item.icon}</div>
+                    <span className="text-sm font-medium">{item.label}</span>
+                  </div>
+                  <p className="text-sm italic">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </motion.div>
+
+      <motion.div
+        style={{ x: x2 }}
+        className="flex gap-8 w-full max-w-[1400px] mx-auto pb-10"
+      >
+        {secondSlide.map((section, index) => (
+          <div
+            key={index}
+            className="flex flex-col p-6 bg-white/60 text-stone-600 rounded-lg shadow-lg min-w-[350px] max-w-[400px]"
+          >
+            <h2 className="text-lg font-bold mb-4">{section.title}</h2>
+            <div className="space-y-2">
+              {section.content.map((item, idx) => (
+                <div key={idx} className="flex flex-col gap-1">
+                  <div className="flex items-center gap-3">
+                    <div className="text-lg">{item.icon}</div>
+                    <span className="text-sm font-medium">{item.label}</span>
+                  </div>
+                  <p className="text-sm italic">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </motion.div>
     </div>
   );
 }

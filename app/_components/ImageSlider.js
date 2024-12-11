@@ -34,32 +34,45 @@ const ImageSlider = ({ images }) => {
   return (
     <div className="flex items-center flex-col justify-center relative py-4">
       {/* Slider Images */}
-      <div className="relative w-full h-[300px] flex justify-center items-center overflow-hidden">
-        {images.map((image, index) => (
-          <motion.img
-            key={index}
-            src={image}
-            alt={`Image ${index}`}
-            className="absolute rounded-lg shadow-lg"
-            initial="center"
-            animate={positions[positionIndexes[index]]}
-            variants={imageVariants}
-            transition={{ duration: 0.5 }}
-            style={{ width: "40%" }}
-          />
-        ))}
+      <div className="relative w-full h-[400px] flex justify-center items-center overflow-hidden">
+        {images.map((image, index) => {
+          const isCenter = positions[positionIndexes[index]] === "center";
+          return (
+            <motion.img
+              key={index}
+              src={image}
+              alt={`Image ${index}`}
+              className="absolute rounded-lg shadow-lg"
+              initial="center"
+              animate={positions[positionIndexes[index]]}
+              variants={imageVariants}
+              whileHover={
+                isCenter
+                  ? { scale: 1.5, width: "50%", height: "auto", zIndex: 6 }
+                  : {}
+              }
+              transition={{ duration: 0.5 }}
+              style={{
+                width: "auto",
+                height: "100%",
+                maxHeight: "400px",
+                maxWidth: "90%",
+                objectFit: "contain",
+              }}
+            />
+          );
+        })}
       </div>
 
-      {/* Navigation Buttons */}
       <div className="flex flex-row gap-3 mt-4">
         <div
-          className=" text-gray-700 rounded-md py-2 px-4 flex items-center justify-center"
+          className=" text-stone-700 rounded-md py-2 px-4 flex items-center justify-center"
           onClick={handleBack}
         >
           <MdOutlineArrowBackIos className="text-3xl" />
         </div>
         <div
-          className=" text-gray-700 rounded-md py-2 px-4 flex items-center justify-center"
+          className=" text-stone-700 rounded-md py-2 px-4 flex items-center justify-center"
           onClick={handleNext}
         >
           <MdOutlineNavigateNext className="text-3xl" />

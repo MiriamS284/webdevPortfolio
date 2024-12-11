@@ -12,9 +12,9 @@ import StackSection from "./_components/StackSection";
 import ResourcesSection from "./_components/ResourcesSection";
 import Navigation from "./_components/Navigation";
 import ContactForm from "./_components/ContactForm";
-//import HorizontalScroll from "./_components/HorizontalScroll";
 import DynamicSlider from "./_components/ProjectSlider";
 import DigitalGarden from "./_components/DigitalerGarden";
+import Footer from "./_components/Footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -126,6 +126,26 @@ export default function Page() {
           }
         },
       });
+
+      ScrollTrigger.create({
+        trigger: "#contact", // Trigger auf die Kontakt-Sektion
+        start: "top bottom", // Start, wenn die Kontakt-Sektion in den Viewport scrollt
+        onEnter: () => {
+          gsap.to("#footer", {
+            opacity: 1,
+            pointerEvents: "auto",
+            duration: 0.3,
+          });
+        },
+        onLeaveBack: () => {
+          gsap.to("#footer", {
+            opacity: 0,
+            pointerEvents: "none",
+            duration: 0.3,
+          });
+        },
+      });
+
       updateHeaderText();
       return () => {
         ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
@@ -272,7 +292,7 @@ export default function Page() {
           </section>
           <section
             id="stack"
-            className="bg-[#fafaf9] w-screen min-h-screen flex justify-center items-center relative"
+            className="bg-[#fafaf9] w-screen min-h-screen flex relative px-8 py-16"
           >
             <div className="section-title fixed top-0 left-0 w-full h-[60px] flex items-center justify-center text-[#44403c] text-lg opacity-0">
               Mein Stack
@@ -286,7 +306,9 @@ export default function Page() {
                 priority
               />
             </div>
-            <StackSection />
+            <div className="w-full z-10">
+              <StackSection />
+            </div>
           </section>
           <section className="bg-[#44403c] w-screen min-h-screen flex justify-center items-center relative">
             <ResourcesSection />
@@ -298,7 +320,7 @@ export default function Page() {
             <div className="section-title fixed top-0 left-0 w-full h-[60px] flex items-center justify-center text-[#44403c] text-lg opacity-0">
               Projekte
             </div>
-            {/* <HorizontalScroll /> */}
+
             <DynamicSlider />
           </section>
 
@@ -306,20 +328,19 @@ export default function Page() {
             id="seed"
             className="bg-[#44403c] w-screen min-h-screen flex justify-center items-center relative"
           >
-            <div className="bg-opacity-50 section-title fixed top-0 left-0 w-full h-[60px] flex items-center justify-center bg-[#fafaf9] text-[#44403c] text-lg opacity-8">
-              Gedanken & Konzeptionelle Ideen
-            </div>
             <DigitalGarden />
           </section>
           <section
             id="contact"
-            className="bg-[#44403c] w-screen min-h-screen flex justify-center items-center relative"
+            className="relative bg-[#fafaf9] w-screen min-h-screen flex justify-center items-center overflow-hidden"
           >
-            <div className="section-title fixed top-0 left-0 w-full h-[60px] flex items-center justify-center bg-[#fafaf9] text-[#44403c] bg-opacity-50 text-lg opacity-0">
-              Kontaktiere mich für Dein & Unser Projekt
+            <div className="relative z-10 w-full max-w-screen-lg p-8 text-stone-200">
+              <ContactForm />
             </div>
-            <ContactForm />
           </section>
+          <div className="w-screen bg-[#44403c]" id="footer">
+            <Footer />
+          </div>
         </div>
       </ReactLenis>
     </>

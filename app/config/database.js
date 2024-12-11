@@ -14,16 +14,12 @@ if (!cached) {
 
 async function connectToDatabase() {
   if (cached.conn) {
-    console.log("Verwende bestehende Datenbankverbindung.");
     return cached.conn;
   }
 
   if (!cached.promise) {
-    console.log("Erstelle neue Datenbankverbindung...");
     const options = {
       bufferCommands: false,
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
     };
 
     cached.promise = mongoose

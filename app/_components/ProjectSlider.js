@@ -163,9 +163,9 @@ export default function DynamicSlider() {
                       <h3 className="text-sm font-medium text-gray-500">
                         Kategorie
                       </h3>
-                      <siv className="text-sm text-gray-700">
+                      <div className="text-sm text-gray-700">
                         {sanitizeAndParse(modalData.category)}
-                      </siv>
+                      </div>
                     </div>
                     <div>
                       <h3 className="text-sm font-medium text-gray-500">

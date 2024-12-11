@@ -36,7 +36,7 @@
   --stone-50: #fafaf9;
   --stone-100: #f5f5f4;
   --stone-200: #e7e5e4;
-  --stone-300: #d6d3d1;
+  --stone-300: ;
   --stone-400: #a8a29e;
   --stone-500: #78716c;
   --stone-600: #57534e;
@@ -109,7 +109,15 @@ html,
 body {
   width: 100vh;
   height: 100vh;
-  color: #d6d3d1;
+}
+
+::-webkit-scrollbar {
+  width: 0; /* Versteckt die horizontale Scrollbar */
+  height: 0; /* Versteckt die vertikale Scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent; /* Unsichtbarer Daumen */
 }
 
 /* Für Chrome, Edge und Safari 
@@ -122,9 +130,6 @@ pre {
   font-family: "Source Code Pro", monospace;
 }
 
-.shadow-right {
-  box-shadow: 3px 0 5px rgba(0, 0, 0, 0.1);
-}
 
 .horizontal-scrollbar {
   scrollbar-width: thin;
