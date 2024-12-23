@@ -112,12 +112,52 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 0; /* Versteckt die horizontale Scrollbar */
-  height: 0; /* Versteckt die vertikale Scrollbar */
+  width: 0;
+  height: 0;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: transparent; /* Unsichtbarer Daumen */
+  background: transparent;
+}
+
+.section-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.section-title.hidden {
+  opacity: 0;
+  visibility: hidden;
+  z-index: -1;
+}
+
+.section-title-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+  pointer-events: none;
+  font-size: 5vw;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.5;
+  color: #44403c;
+}
+
+.title-word {
+  margin: 0.5em 0;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
 }
 
 /* Für Chrome, Edge und Safari 

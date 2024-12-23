@@ -59,29 +59,30 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="flex h-screen px-4">
-      <div className="hidden md:flex items-start justify-end w-1/4 pr-1 pt-4">
-        <span className="text-stone-300 text-3xl mt-4 tracking-widest">
-          KONTAKT
+    <div className="relative flex flex-col items-center justify-center h-screen px-4">
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/img/dandelion.png"
+          alt="contact-dandelion-image"
+          fill={true}
+          objectFit="cover"
+          quality={100}
+          priority={true}
+        />
+      </div>
+      <div className="relative z-20 flex items-center justify-center gap-4 text-3xl font-bold tracking-widest uppercase">
+        <span className="text-stone-400">Kontakt</span>
+        <span
+          className="cursor-pointer hover:text-stone-400 text-stone-500"
+          onClick={() => setIsFormVisible(!isFormVisible)}
+        >
+          Formular
         </span>
       </div>
 
-      <div
-        className={`${
-          isFormVisible ? "bg-stone-200" : ""
-        } text-stone-500 tracking-widest w-full max-w-[700px] p-8 space-y-4 transition-all duration-500`}
-      >
-        <h2
-          onClick={() => setIsFormVisible(!isFormVisible)}
-          className={`text-3xl text-left tracking-widest -ml-8 cursor-pointer hover:bg-stone-400 hover:text-stone-200 transition-colors px-4 ${
-            isFormVisible ? "bg-stone-400 text-stone-200" : "bg-transparent"
-          }`}
-        >
-          FORMULAR
-        </h2>
-
-        {isFormVisible && !isSubmitted && (
-          <div className="overflow-hidden transition-all duration-500 max-h-screen p-4">
+      {isFormVisible && (
+        <div className="relative z-20 w-full max-w-[700px] mt-8 p-8 bg-white bg-opacity-90 rounded-md">
+          {!isSubmitted && (
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="flex space-x-4">
                 <div className="flex-1">
@@ -95,10 +96,10 @@ export default function ContactForm() {
                     type="text"
                     id="firstName"
                     name="firstName"
-                    placeholder="Ihr Vorname"
+                    placeholder="zB Miriam"
                     value={formData.firstName}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 bg-transparent border-b-2 text-stone-600 border-stone-600 placeholder-stone-400 focus:outline-none focus:border-white"
+                    className="w-full px-4 py-2 bg-transparent border-b-2 text-stone-700 border-stone-600 placeholder-stone-400 focus:outline-none focus:border-stone-800"
                     required
                   />
                 </div>
@@ -113,10 +114,10 @@ export default function ContactForm() {
                     type="text"
                     id="lastName"
                     name="lastName"
-                    placeholder="Ihr Nachname"
+                    placeholder="zB Sparbrod"
                     value={formData.lastName}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 bg-transparent border-b-2 text-stone-600 border-stone-600 placeholder-stone-400 focus:outline-none focus:border-white"
+                    className="w-full px-4 py-2 bg-transparent border-b-2 text-stone-600 border-stone-600 placeholder-stone-400 focus:outline-none focus:border-stone-800"
                     required
                   />
                 </div>
@@ -133,10 +134,10 @@ export default function ContactForm() {
                   type="text"
                   id="organization"
                   name="organization"
-                  placeholder="Name Ihrer Organisation"
+                  placeholder="zB WebDevSparbrod"
                   value={formData.organization}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 bg-transparent border-b-2 text-stone-600 border-stone-600 placeholder-stone-400 focus:outline-none focus:border-white"
+                  className="w-full px-4 py-2 bg-transparent border-b-2 text-stone-600 border-stone-600 placeholder-stone-400 focus:outline-none focus:border-stone-800"
                 />
               </div>
 
@@ -148,10 +149,10 @@ export default function ContactForm() {
                   type="text"
                   id="subject"
                   name="subject"
-                  placeholder="Betreff der Nachricht"
+                  placeholder="Bitte um Zusammenarbeit Web Applikation..."
                   value={formData.subject}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 bg-transparent border-b-2 text-stone-600 border-stone-600 placeholder-stone-400 focus:outline-none focus:border-white"
+                  className="w-full px-4 py-2 bg-transparent border-b-2 text-stone-600 border-stone-600 placeholder-stone-400 focus:outline-none focus:border-stone-800"
                   required
                 />
               </div>
@@ -164,10 +165,10 @@ export default function ContactForm() {
                   type="email"
                   id="email"
                   name="email"
-                  placeholder="Ihre E-Mail-Adresse"
+                  placeholder="sparbrod.webdev@gmail.com"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 bg-transparent border-b-2 text-stone-600 border-stone-600 placeholder-stone-400 focus:outline-none focus:border-white"
+                  className="w-full px-4 py-2 bg-transparent border-b-2 text-stone-600 border-stone-600 placeholder-stone-400 focus:outline-none focus:border-stone-800"
                   required
                 />
               </div>
@@ -179,44 +180,44 @@ export default function ContactForm() {
                 <textarea
                   id="message"
                   name="message"
-                  placeholder="Ihre Nachricht"
+                  placeholder="Ich suche einen Full - Stack Entwickler für folgendes Projekt..."
                   value={formData.message}
                   onChange={handleChange}
                   rows="4"
-                  className="w-full px-4 py-2 bg-transparent border-b-2 text-stone-600 border-stone-600 placeholder-stone-400 focus:outline-none focus:border-white"
+                  className="w-full px-4 py-2 bg-transparent border-b-2 text-stone-600 border-stone-600 placeholder-stone-400 focus:outline-none focus:border-stone-800"
                   required
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-stone-200 text-stone-600 py-2 hover:bg-stone-400 transition-colors"
+                className="w-full bg-stone-500 text-white py-2 hover:bg-stone-700 transition-colors"
               >
                 Absenden
               </button>
             </form>
-          </div>
-        )}
+          )}
 
-        {isSubmitted && (
-          <div className="flex flex-col items-center justify-center h-full">
-            <p className="text-stone-600 text-md text-center">
-              Vielen Dank für Ihre Kontaktaufnahme! <br />
-              Ich freue mich über Ihre Nachricht und werde mich zeitnah bei
-              Ihnen zurückmelden. Bis dahin wünsche ich Ihnen alles Gute.
-            </p>
-            <div className="mb-4">
-              <Image
-                src="/sign_1.png"
-                alt="Logo"
-                width={250}
-                height={250}
-                className="rounded-full"
-              />
+          {isSubmitted && (
+            <div className="flex flex-col items-center justify-center h-full">
+              <p className="text-stone-600 text-md text-center">
+                Vielen Dank für Ihre Kontaktaufnahme! <br />
+                Ich freue mich über Ihre Nachricht und werde mich zeitnah bei
+                Ihnen zurückmelden. Bis dahin wünsche ich Ihnen alles Gute.
+              </p>
+              <div className="mb-4">
+                <Image
+                  src="/sign_1.png"
+                  alt="Logo"
+                  width={250}
+                  height={250}
+                  className="rounded-full"
+                />
+              </div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

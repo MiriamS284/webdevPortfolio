@@ -3,11 +3,11 @@
 import { useRef, useState, useEffect } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 import Image from "next/image";
-import styles from "../_styles/DynamicSlider.module.css";
 import { sanitizeAndParse } from "../_lib/helpers";
 import { FiGithub } from "react-icons/fi";
 import { CgWebsite } from "react-icons/cg";
 import ImageSlider from "./ImageSlider";
+import modalStyles from "../_styles/ModalScroll.module.css";
 
 export default function DynamicSlider() {
   const [productionProjects, setProductionProjects] = useState([]);
@@ -47,11 +47,13 @@ export default function DynamicSlider() {
   const openModal = (project) => {
     setModalData(project);
     setModalVisible(true);
+    document.documentElement.classList.add(modalStyles["no-scroll"]);
   };
 
   const closeModal = () => {
     setModalVisible(false);
     setModalData(null);
+    document.documentElement.classList.remove(modalStyles["no-scroll"]);
   };
 
   return (
@@ -114,7 +116,7 @@ export default function DynamicSlider() {
             onClick={(e) => e.stopPropagation()}
           >
             <div
-              className={`overflow-y-auto p-6 ${styles["scrollable-content"]}`}
+              className={`overflow-y-auto p-6 ${modalStyles["modal-content"]}`}
             >
               <div className="flex flex-row gap-6">
                 <div className="flex-shrink-0 w-1/3 flex flex-col gap-4">

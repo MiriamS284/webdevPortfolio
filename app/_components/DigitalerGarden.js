@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { sanitizeAndParse } from "../_lib/helpers";
-import styles from "../_styles/DynamicSlider.module.css";
+import styles from "../_styles/ModalScroll.module.css";
 
 const categoriesList = [
-  "Technologien und Tools",
+  "Technologien & Tools",
   "Best Practices",
   "UI/UX-Innovationen",
   "Open Source & Community",
@@ -15,7 +15,7 @@ const categoriesList = [
   "Case Studies",
   "Inspiration & Trends",
   "Tools & Ressourcen",
-  "Wissensmanagement und Kreativität",
+  "Wissensmanagement & Kreativität",
 ];
 
 const DigitalGarden = () => {
@@ -28,7 +28,6 @@ const DigitalGarden = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalData, setModalData] = useState(null);
 
-  // Fetch BlogPosts
   useEffect(() => {
     async function fetchBlogPosts() {
       try {
@@ -64,11 +63,13 @@ const DigitalGarden = () => {
   const openModal = (post) => {
     setModalData(post);
     setModalVisible(true);
+    document.documentElement.classList.add(styles["no-scroll"]);
   };
 
   const closeModal = () => {
     setModalVisible(false);
     setModalData(null);
+    document.documentElement.classList.remove(styles["no-scroll"]);
   };
 
   const handleMouseEnter = (excerpt, event) => {
@@ -85,7 +86,6 @@ const DigitalGarden = () => {
 
   return (
     <div className="max-w-4xl mx-auto mt-8 p-4">
-      {/* Kategorien Dropdown */}
       <div className="flex justify-end mb-6 relative">
         <button
           className="p-2 text-sm text-gray-700 bg-stone-200 rounded-md border border-none"
@@ -160,7 +160,7 @@ const DigitalGarden = () => {
           onClick={closeModal}
         >
           <div
-            className={`bg-stone-300 rounded-lg w-[90%] h-[90vh] overflow-y-auto p-6 relative ${styles["scrollable-content"]}`}
+            className={`${styles["modal-content"]} bg-stone-300 rounded-lg w-[90%] h-[90vh] p-6 relative`}
             onClick={(e) => e.stopPropagation()}
           >
             <h2 className="text-xl font-medium text-stone-700 mb-4">
@@ -187,7 +187,6 @@ const DigitalGarden = () => {
                     />
                   )}
 
-                  {/* Fallback für unbekannte Typen */}
                   {!["paragraph", "text", "image"].includes(section.type) && (
                     <p className="text-red-900">
                       Unbekannter Abschnittstyp: {section.type}

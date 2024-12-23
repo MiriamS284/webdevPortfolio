@@ -4,53 +4,25 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const MobileContext = createContext();
 
-export function useMobile() {
-  return useContext(MobileContext);
-}
-
-export function MobileProvider({ children }) {
+export const MobileProvider = ({ children }) => {
   const [isMobile, setIsMobile] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => {
+    const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
 
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    checkMobile();
 
-    handleResize(); // Set initial state
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      window.removeEventListener("scroll", handleScroll);
-    };
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen((prev) => !prev);
-  };
-
-  const closeSidebar = () => {
-    setIsSidebarOpen(false);
-  };
-
   return (
-    <MobileContext.Provider
-      value={{
-        isMobile,
-        isSidebarOpen,
-        toggleSidebar,
-        closeSidebar,
-        isScrolled,
-      }}
-    >
+    <MobileContext.Provider value={{ isMobile }}>
       {children}
     </MobileContext.Provider>
   );
-}
+};
+
+export const useMobileContext = () => useContext(MobileContext);

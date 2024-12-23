@@ -128,8 +128,8 @@ export default function Page() {
       });
 
       ScrollTrigger.create({
-        trigger: "#contact", // Trigger auf die Kontakt-Sektion
-        start: "top bottom", // Start, wenn die Kontakt-Sektion in den Viewport scrollt
+        trigger: "#contact",
+        start: "top center",
         onEnter: () => {
           gsap.to("#footer", {
             opacity: 1,
@@ -160,40 +160,43 @@ export default function Page() {
     sections.forEach((section) => {
       const title = section.querySelector(".section-title");
 
-      gsap.set(title, { y: -50, opacity: 0 });
+      gsap.set(title, {
+        y: -50,
+        opacity: 0,
+        visibility: "hidden",
+        zIndex: -1,
+      });
 
       ScrollTrigger.create({
         trigger: section,
-        start: "top top",
-        end: "top+=200",
+        start: "top 40%",
+        end: "bottom 60%",
         onEnter: () => {
+          title.classList.remove("hidden");
           gsap.to(title, {
             y: 0,
             opacity: 1,
-            duration: 0.5,
+            visibility: "visible",
+            zIndex: 50,
+            duration: 0.8,
             ease: "power2.out",
           });
-        },
-        onLeave: () => {
+
           gsap.to(title, {
+            delay: 3,
             opacity: 0,
-            duration: 0.5,
+            visibility: "hidden",
+            zIndex: -1,
+            duration: 1,
             ease: "power2.in",
           });
         },
         onLeaveBack: () => {
-          gsap.to(title, {
+          gsap.set(title, {
+            y: -50,
             opacity: 0,
-            duration: 0.5,
-            ease: "power2.in",
-          });
-        },
-        onEnterBack: () => {
-          gsap.to(title, {
-            y: 0,
-            opacity: 1,
-            duration: 0.5,
-            ease: "power2.out",
+            visibility: "hidden",
+            zIndex: -1,
           });
         },
       });
@@ -219,7 +222,7 @@ export default function Page() {
                 className="absolute w-[15.5%] h-[52.75%] bg-[#e7e5e4] rounded-[1000px] will-change-transform overflow-hidden opacity-100"
               >
                 <Image
-                  src="/img/bg_intro.jpg"
+                  src="/img/bg_intro_1.jpg"
                   alt=""
                   layout="fill"
                   objectFit="cover"
@@ -244,18 +247,16 @@ export default function Page() {
                 <p className="text-[16px] font-medium text-justify text-[#a8a29e] leading-[130%] relative mt-[0.75em] translate-x-[20px] opacity-0">
                   Ich bin Web-Entwicklerin mit dem Fokus auf funktionale und
                   moderne Web-Applikationen. Dabei fasziniert mich besonders das
-                  Zusammenspiel von Sprache im Front- und Backend-Bereich – ein
-                  kreatives Spiel, das Schnittstellen verständlich und effizient
-                  macht. Mit technischem Know-how und einer Leidenschaft für
-                  klare Strukturen schaffe ich digitale Lösungen, die nicht nur
+                  Zusammenspiel im Front- und Backend-Bereich – ein kreatives
+                  Spiel, das Schnittstellen verständlich und effizient macht.
+                  Mit technischem Know-how und einer Leidenschaft für klare
+                  Strukturen schaffe ich digitale Lösungen, die nicht nur
                   zuverlässig funktionieren, sondern auch einen echten Mehrwert
                   bieten.
                 </p>
-                <p className="text-[16px] font-medium text-justify text-[#a8a29e] leading-[130%] relative mt-[0.75em] translate-x-[20px] opacity-0">
-                  Mein digitaler Garten lädt dazu ein, meine Arbeit
-                  nachzuvollziehen, Feedback zu geben und aktiv mitzuwirken. Er
-                  ist ein lebendiger Raum für Austausch, gemeinsames Lernen und
-                  nachhaltige digitale Projekte.
+                <p className="text-[16px] font-bold text-justify text-[#a8a29e] leading-[130%] relative mt-[0.75em] translate-x-[20px] opacity-0">
+                  Ihre Vision - Mein Code. Gemeinsam gestalten wir Ihre digitale
+                  Zukunft!
                 </p>
               </div>
             </div>
@@ -285,7 +286,7 @@ export default function Page() {
             id="bios"
             className="bg-[#44403c] w-screen min-h-screen flex justify-center items-center relative"
           >
-            <div className="section-title fixed top-0 left-0 w-full h-[60px] flex items-center justify-center text-[#fafaf9] text-lg opacity-0">
+            <div className="section-title absolute z-50 text-[#fafaf9] font-extrabold text-[8vw] tracking-wide">
               Über Mich
             </div>
             <Roadmap />
@@ -294,8 +295,8 @@ export default function Page() {
             id="stack"
             className="bg-[#fafaf9] w-screen min-h-screen flex relative px-8 py-16"
           >
-            <div className="section-title fixed top-0 left-0 w-full h-[60px] flex items-center justify-center text-[#44403c] text-lg opacity-0">
-              Mein Stack
+            <div className="section-title absolute z-50 text-[#44403c] font-extrabold text-[8vw] tracking-wide">
+              Tech Stack
             </div>
             <div className="absolute inset-0 z-0">
               <Image
@@ -317,8 +318,10 @@ export default function Page() {
             id="projects"
             className="bg-[#fafaf9] w-screen min-h-screen flex justify-center items-center relative"
           >
-            <div className="section-title fixed top-0 left-0 w-full h-[60px] flex items-center justify-center text-[#44403c] text-lg opacity-0">
-              Projekte
+            <div className="section-title-vertical">
+              <div className="title-word">Production</div>
+              <div className="title-word">Projects</div>
+              <div className="title-word">Development</div>
             </div>
 
             <DynamicSlider />
@@ -328,19 +331,25 @@ export default function Page() {
             id="seed"
             className="bg-[#44403c] w-screen min-h-screen flex justify-center items-center relative"
           >
+            <div className="section-title absolute z-50 text-[#fafaf9] font-bold text-[5vw] tracking-wide">
+              Gedanken - Ideen - Konzepte
+            </div>
             <DigitalGarden />
           </section>
           <section
             id="contact"
-            className="relative bg-[#fafaf9] w-screen min-h-screen flex justify-center items-center overflow-hidden"
+            className="relative bg-[#fafaf9] w-screen min-h-screen flex flex-col justify-center items-center overflow-hidden"
           >
-            <div className="relative z-10 w-full max-w-screen-lg p-8 text-stone-200">
+            <div className="section-title absolute z-50 text-[#44403c] font-bold text-[8vw]">
+              Let&apos;s work together!
+            </div>
+            <div className="relative z-10 w-full max-w-4xl mx-auto p-8 text-stone-200">
               <ContactForm />
             </div>
+            <div className="w-screen" id="footer">
+              <Footer />
+            </div>
           </section>
-          <div className="w-screen bg-[#44403c]" id="footer">
-            <Footer />
-          </div>
         </div>
       </ReactLenis>
     </>

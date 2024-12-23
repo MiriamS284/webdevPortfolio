@@ -88,7 +88,15 @@ export default function Navigation() {
             className="fixed top-4 left-4 z-50 cursor-pointer"
             onMouseEnter={handleMouseEnterNav}
           >
-            <Image src={logoSrc} alt="Logo" width={160} height={160} />
+            <Image
+              src={logoSrc}
+              alt="Logo"
+              width={160}
+              height={160}
+              style={{
+                objectFit: "contain",
+              }}
+            />
           </div>
 
           <nav
@@ -113,7 +121,7 @@ export default function Navigation() {
             </ul>
           </nav>
 
-          <div className="fixed bottom-10 left-4 z-50 flex flex-col items-center space-y-4">
+          <div className="fixed bottom-20 left-4 z-50 flex flex-col items-center space-y-4">
             <Link
               href="https://www.linkedin.com/in/miriam-sparbrod-8562791a9/"
               target="_blank"

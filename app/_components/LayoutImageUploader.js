@@ -22,7 +22,7 @@ const LayoutImagesUploader = ({ onImageUpload }) => {
             toast.error("Upload-Fehler: " + error.message);
           } else if (result && result.event === "success") {
             const secureUrl = result.info.secure_url;
-            onImageUpload(secureUrl); // URL an ProjectForm übergeben
+            onImageUpload(secureUrl);
             toast.success("Bild erfolgreich hochgeladen");
           }
         }

@@ -3,7 +3,7 @@
 function InfoPopup({ title, content, onClose, position }) {
   const style = {
     position: "fixed",
-    top: "100px", // Mehr Padding von oben
+    top: "100px",
     right: position === "right" ? "20px" : "auto",
     left: position === "left" ? "20px" : "auto",
     backgroundColor: "white",

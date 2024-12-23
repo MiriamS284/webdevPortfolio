@@ -2,6 +2,4 @@
 
 export default function Loading() {
   <p>loading...</p>;
-
-  //return <Spinner />;
 }
