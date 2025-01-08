@@ -130,7 +130,7 @@ export default function Roadmap() {
   }, []);
 
   return (
-    <section className="py-16" id="roadmap">
+    <section className="py-16" id="bio">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4 text-stone-500">BIO</h2>
@@ -153,7 +153,7 @@ export default function Roadmap() {
                 index % 2 === 0 ? "flex-row-reverse" : ""
               }`}
               style={{
-                marginTop: index % 2 !== 0 ? "50px" : "0", // Zusätzlicher Abstand für gerade Phasen
+                marginTop: index % 2 !== 0 ? "50px" : "0",
               }}
             >
               <motion.div
@@ -167,11 +167,9 @@ export default function Roadmap() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                {/* Card-Komponente */}
                 <Card phase={phase.phase} events={phase.events} />
               </motion.div>
 
-              {/* Knotenpunkt und Querstrich nur für ungerade Phasen */}
               {index % 2 === 0 && (
                 <>
                   <div

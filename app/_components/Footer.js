@@ -1,18 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { imprintContent } from "./ImprintContent";
 
 const Footer = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [modalContent, setModalContent] = useState("");
-
-  const openModal = (content) => {
-    setModalContent(content);
-    setIsModalVisible(true);
-  };
 
   const closeModal = () => {
-    setModalContent("");
     setIsModalVisible(false);
   };
 
@@ -20,56 +14,53 @@ const Footer = () => {
     <div>
       <footer
         id="footer"
-        className="fixed bottom-0 left-0 w-full bg-[#44403c]/70 text-stone-200 py-4 px-6 flex flex-col sm:flex-row justify-center items-center hover:bg-[#3c3835] transition-colors duration-300 z-50"
+        className="relative w-full bg-[#44403c]/70 text-stone-200 py-4 px-6 flex flex-col sm:flex-row justify-center items-center hover:bg-[#3c3835] transition-colors duration-300 z-50"
       >
         <div className="text-center mb-2 sm:mb-0 mr-20">
-          &copy; 2024 SparbrodWebDev
+          &copy;2025 SparbrodWebDev
         </div>
         <div className="flex flex-row items-center space-x-4">
           <button
-            onClick={() =>
-              openModal(
-                "Hier steht die Datenschutzerklärung. Bitte ergänzen Sie den Inhalt entsprechend Ihrer Anforderungen."
-              )
-            }
+            onClick={() => setIsModalVisible(true)}
             className="text-sm hover:underline"
           >
-            Private Policy
-          </button>
-          <button
-            onClick={() =>
-              openModal(
-                "Hier steht das Impressum. Bitte ergänzen Sie den Inhalt entsprechend Ihrer Anforderungen."
-              )
-            }
-            className="text-sm hover:underline"
-          >
-            Imprint
+            Impressum
           </button>
         </div>
       </footer>
 
       {isModalVisible && (
         <div
-          className="fixed inset-0 bg-stone-900 bg-opacity-50 flex justify-center items-center z-50"
+          className="fixed inset-0 bg-stone-900 bg-opacity-50 z-50 flex justify-center items-center p-4"
           onClick={closeModal}
         >
           <div
-            className="bg-white rounded-lg max-w-[600px] w-full p-10 relative shadow-lg"
+            className="bg-stone-100 rounded-lg max-w-[900px] w-full max-h-[100vh] relative p-4 flex flex-col gap-2"
+            style={{ transform: "scale(0.95)" }}
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              className="absolute top-2 right-3 text-stone-500 hover:text-stone-800"
+              className="absolute top-2 right-3 text-stone-500 hover:text-stone-800 text-xs"
               onClick={closeModal}
             >
               ✕
             </button>
-            <h2 className="text-lg font-bold text-stone-800 mb-4">
-              {modalContent.startsWith("Hier steht die Datenschutzerklärung")
-                ? "Private Policy"
-                : "Imprint"}
+            <h2 className="text-base font-bold text-stone-800 mb-2">
+              Impressum
             </h2>
-            <p className="text-gray-600">{modalContent}</p>
+            {imprintContent.map((section, index) => (
+              <div key={index} className="mb-4">
+                <h3 className="text-sm font-semibold text-stone-700 mb-1">
+                  {section.title}
+                </h3>
+                <p className="text-stone-600 whitespace-pre-line text-xs leading-5">
+                  {section.content}
+                </p>
+                {index < imprintContent.length - 1 && (
+                  <hr className="my-2 border-stone-300" />
+                )}
+              </div>
+            ))}
           </div>
         </div>
       )}

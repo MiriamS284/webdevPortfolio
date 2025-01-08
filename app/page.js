@@ -127,25 +127,6 @@ export default function Page() {
         },
       });
 
-      ScrollTrigger.create({
-        trigger: "#contact",
-        start: "top center",
-        onEnter: () => {
-          gsap.to("#footer", {
-            opacity: 1,
-            pointerEvents: "auto",
-            duration: 0.3,
-          });
-        },
-        onLeaveBack: () => {
-          gsap.to("#footer", {
-            opacity: 0,
-            pointerEvents: "none",
-            duration: 0.3,
-          });
-        },
-      });
-
       updateHeaderText();
       return () => {
         ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
@@ -158,13 +139,17 @@ export default function Page() {
     const sections = document.querySelectorAll("section");
 
     sections.forEach((section) => {
-      const title = section.querySelector(".section-title");
+      const title = section.querySelector(
+        ".section-title, .section-title-vertical"
+      );
+
+      if (!title) return;
 
       gsap.set(title, {
         y: -50,
         opacity: 0,
         visibility: "hidden",
-        zIndex: -1,
+        zIndex: 50,
       });
 
       ScrollTrigger.create({
@@ -184,6 +169,7 @@ export default function Page() {
 
           gsap.to(title, {
             delay: 3,
+            filter: "blur(10px)",
             opacity: 0,
             visibility: "hidden",
             zIndex: -1,
@@ -197,9 +183,31 @@ export default function Page() {
             opacity: 0,
             visibility: "hidden",
             zIndex: -1,
+            filter: "none",
           });
         },
       });
+    });
+  }, []);
+
+  useEffect(() => {
+    ScrollTrigger.create({
+      trigger: "#contact",
+      start: "bottom bottom",
+      onEnter: () => {
+        gsap.to("#footer", {
+          opacity: 1,
+          pointerEvents: "auto",
+          duration: 0.5,
+        });
+      },
+      onLeaveBack: () => {
+        gsap.to("#footer", {
+          opacity: 0,
+          pointerEvents: "none",
+          duration: 0.3,
+        });
+      },
     });
   }, []);
 
@@ -223,11 +231,11 @@ export default function Page() {
               >
                 <Image
                   src="/img/bg_intro_1.jpg"
-                  alt=""
-                  layout="fill"
-                  objectFit="cover"
+                  alt="Intro_Logo_WebDev"
+                  fill
                   className="opacity-0"
                   ref={handImageRef}
+                  style={{ objectFit: "cover" }}
                 />
               </div>
             </div>
@@ -268,9 +276,9 @@ export default function Page() {
                 <Image
                   src="/logo_side.png"
                   alt="Logo Background"
-                  layout="fill"
-                  objectFit="contain"
+                  fill
                   priority
+                  style={{ objectFit: "contain" }}
                 />
               </div>
 
